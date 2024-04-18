@@ -1,0 +1,12 @@
+.card {
+    border: none; /* Supprime le contour */
+    box-shadow: none; /* Supprime l'ombre */
+}
+
+.card-icon {
+    color: #8A2BE2; /* Couleur violette */
+}
+
+.bloc-footer {
+    background-color: #8A2BE2;
+}

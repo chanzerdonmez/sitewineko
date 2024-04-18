@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<h4 class="text-center mb-5 mt-5">Mon panier</h4>
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <!-- <th scope="col">#</th> -->
+                <th scope="col">Produit</th>
+                <!-- <th scope="col">Marque</th> -->
+                <th scope="col">Description</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- <th scope="row">1</th> -->
+                <td><img src="https://picsum.photos/75" alt="Image Produit A"></td>
+                <!-- <td>Apple</td> -->
+                <td>iPhone 13 Pro Graphite 128Go 5G ...</td>
+                <td>699,99€</td>
+                <td><button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+                <!-- <th scope="row">2</th> -->
+                <td><img src="https://picsum.photos/75" alt="Image Produit B"></td>
+                <!-- <td>Samsung</td> -->
+                <td>Galaxy S23 Ultra Vert 256 Go 5G ...</td>
+                <td>679,99€</td>
+                <td><button type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <!-- Ajoutez plus de lignes pour d'autres produits -->
+        </tbody>
+    </table>
+    <div class="text-end">
+        <h5>Total du panier : 1379,98€</h5>
+        <button class="btn btn-primary" id="btn-paiement">Procéder au paiement</button>
+    </div>
+</div>

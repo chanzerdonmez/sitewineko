@@ -1,0 +1,17 @@
+.maclasse {
+    color: red;
+}
+
+#btn-cart {
+    background-color: #8A2BE2;
+    border-color: #8A2BE2;
+}
+
+#btn-cart:hover {
+    background-color: #a549fb;
+    border-color: #a549fb; 
+}
+
+#text-sous-titre {
+    color:#8A2BE2;
+}

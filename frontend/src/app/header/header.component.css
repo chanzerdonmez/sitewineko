@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aclonica&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+#logo {
+color: #8A2BE2;
+font-family: "DM Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: 600;
+font-style: normal;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 280px;
+}
+
+.icon {
+    margin-left: 5px; /* Ajustez cette valeur selon vos besoins */
+}
+
+.form-control {
+    border: none !important;
+    outline: none !important;
+}
+.btn {
+    border: none !important;
+    outline: none !important;
+}
+
+.fa-solid {
+    padding: 0 !important;
+}
+
+
+#navbar1 {
+    background-color: #8A2BE2;
+}
+
+.navbar-brand:hover {
+    color: #8A2BE2; /* ou la couleur de texte que vous souhaitez */
+    text-decoration: none; /* ou la décoration de texte que vous souhaitez */
+}
+
+
+
+.navbar-nav .nav-link:last-child {
+    margin-right: 0;
+}
+
+.nav-link.no-padding-right {
+    padding-right: 0 !important;
+}

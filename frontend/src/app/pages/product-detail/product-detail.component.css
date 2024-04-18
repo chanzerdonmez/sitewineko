@@ -1,0 +1,16 @@
+.card {
+    border: none; /* Pour enlever le contour gris */
+    box-shadow: none; /* Pour enlever l'ombre */
+}
+
+.container {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-panier {
+    background-color: #8A2BE2;
+    border-color: #8A2BE2;
+}
