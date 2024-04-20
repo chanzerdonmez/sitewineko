@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
+
 @Component({
-  selector: 'app-cart',
+  selector: 'app-login',
   standalone: true,
   imports: [
-    HeaderComponent
+    HeaderComponent,
   ],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class CartComponent {
+export class LoginComponent {
 
 }

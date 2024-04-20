@@ -1,0 +1,71 @@
+
+<div class="container">
+
+    <form [formGroup]="formProduct" (ngSubmit)="submitForm()" novalidate>
+        <div class="mb-3">
+            <label for="titre" class="form-label">Titre</label>
+            <input    
+            type="text"
+            class="form-control"
+            [ngClass]="{
+                'has-danger': titre.invalid && (titre.dirty || titre.touched),
+                'has-success': titre.invalid && (titre.dirty || titre.touched),
+            }"
+            id="titre"
+            placeholder="Titre de l'article"
+            formControlName="titre"
+            >
+            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+            class="form-control"
+            [ngClass]="{
+                'has-danger': description.invalid && (description.dirty || description.touched),
+                'has-success': description.invalid && (description.dirty || description.touched),
+            }"
+            id="description"
+            rows="3"
+            placeholder="Description de l'article"
+            formControlName="description"
+            ></textarea>
+            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+
+        </div>
+        <div class="mb-3">
+            <label for="marque" class="form-label">Marque</label>
+            <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+                'has-danger': marque.invalid && (marque.dirty || marque.touched),
+                'has-success': marque.invalid && (marque.dirty || marque.touched),
+            }"
+            id="marque"
+            placeholder="Marque de l'article"
+            formControlName="marque"
+            >
+            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+
+        </div>
+        <div class="mb-3">
+            <label for="prix" class="form-label">Prix</label>
+            <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+                'has-danger': prix.invalid && (prix.dirty || prix.touched),
+                'has-success': prix.invalid && (prix.dirty || prix.touched),
+            }"
+            id="prix"
+            placeholder="Prix de l'article"
+            formControlName="prix"
+            >
+            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+
+        </div>
+        
+    </form>
+
+</div>

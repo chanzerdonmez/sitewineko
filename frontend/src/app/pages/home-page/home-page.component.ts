@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/UserService.service';
 import { UserModel } from '../../models/user.model';
 import { UserDisplayerComponent } from '../../components/user-displayer/user-displayer.component';
-import { HeaderComponent } from '../../header/header.component';
-import { FooterComponent } from '../../footer/footer.component';
-import { CardComponent } from '../../card/card.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-home-page',

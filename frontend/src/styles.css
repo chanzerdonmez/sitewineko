@@ -4,3 +4,16 @@
     margin: 0;
     padding: 0;
 }
+
+.has-danger input, .has-danger select {
+    border: 1px solid red;
+}
+
+.has-success input, .has-success select {
+    border: 1px solid green;
+}
+
+.form-control-feedback {
+    color: red;
+    font-size: 12px;
+}
