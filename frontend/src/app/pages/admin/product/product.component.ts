@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../../components/header/header.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    HeaderComponent
   ],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
@@ -34,7 +36,7 @@ export class ProductComponent implements OnInit {
 
   submitForm(){
     if (this.formProduct.valid){
-
+      // Action button
     }
   }
 

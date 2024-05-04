@@ -1,9 +1,10 @@
+<app-header></app-header>
 
 <div class="container">
 
     <form [formGroup]="formProduct" (ngSubmit)="submitForm()" novalidate>
         <div class="mb-3">
-            <label for="titre" class="form-label">Titre</label>
+            <label for="titre" class="form-label">Titretoto</label>
             <input    
             type="text"
             class="form-control"
@@ -15,7 +16,7 @@
             placeholder="Titre de l'article"
             formControlName="titre"
             >
-            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+            <p *ngIf="titre.errors?.['required']">Champs obligatoire !</p>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -30,7 +31,7 @@
             placeholder="Description de l'article"
             formControlName="description"
             ></textarea>
-            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+            <p *ngIf="titre.errors?.['required']">Champs obligatoire !</p>
 
         </div>
         <div class="mb-3">
@@ -46,7 +47,7 @@
             placeholder="Marque de l'article"
             formControlName="marque"
             >
-            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+            <p *ngIf="titre.errors?.['required']">Champs obligatoire !</p>
 
         </div>
         <div class="mb-3">
@@ -62,10 +63,15 @@
             placeholder="Prix de l'article"
             formControlName="prix"
             >
-            <p *ngIf="titre.error?.['required']">Champs obligatoire !</p>
+            <p *ngIf="titre.errors?.['required']">Champs obligatoire !</p>
 
         </div>
-        
+        <button type="submit" class="btn btn-primary">Valider</button>
+
     </form>
+
+
+
+    
 
 </div>
