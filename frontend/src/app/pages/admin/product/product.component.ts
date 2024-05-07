@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../components/header/header.component';
+import { ProductService } from '../../../services/product.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -22,6 +24,9 @@ export class ProductComponent implements OnInit {
   public description!: FormControl;
   public prix!: FormControl;
 
+  constructor(private productService: ProductService) { }
+
+
   ngOnInit(): void {
     this.createFormControls()
     this.createFormModel()
@@ -34,11 +39,20 @@ export class ProductComponent implements OnInit {
     this.prix = new FormControl('', Validators.required)
   }
 
-  submitForm(){
-    if (this.formProduct.valid){
-      // Action button
+  async submitForm() {
+    if (this.formProduct.valid) {
+      const formData = this.formProduct.getRawValue();
+      try {
+        const response = await lastValueFrom(this.productService.productCreatedOne(formData));
+        console.log("Produit créé avec succès :", response);
+      } catch (error) {
+        console.error("Erreur lors de la création du produit :", error);
+      }
+    } else {
+      console.error("Le formulaire n'est pas valide.");
     }
   }
+
 
   createFormModel() {
     this.formProduct = new FormGroup ({

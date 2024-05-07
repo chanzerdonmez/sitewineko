@@ -34,5 +34,9 @@ export class Api
         return this.http.get(`${apiRoot}product/${id}`, HttpOptions)
     }
 
+    productCreatedOne(productData: any): Observable<any> {
+        return this.http.post(`${apiRoot}product`, productData, HttpOptions);
+    }
+
     productCreatedOne(formatData)
 }
