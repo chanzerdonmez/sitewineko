@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { ProductService } from '../../../services/product.service';
 import { lastValueFrom } from 'rxjs';
+import { ProductModel } from '../../../models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -19,48 +20,47 @@ import { lastValueFrom } from 'rxjs';
 export class ProductComponent implements OnInit {
 
   public formProduct!: FormGroup;
-  public marque!: FormControl;
-  public titre!: FormControl;
+  public brand!: FormControl;
+  public title!: FormControl;
   public description!: FormControl;
-  public prix!: FormControl;
+  public price!: FormControl;
+
+  @Output() productCreated: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
   constructor(private productService: ProductService) { }
 
 
   ngOnInit(): void {
-    this.createFormControls()
-    this.createFormModel()
+    this.createFormControls();
+    this.createFormModel();
   }
 
-  createFormControls(){
-    this.marque = new FormControl('', Validators.required)
-    this.titre = new FormControl('', Validators.required)
-    this.description = new FormControl('', Validators.required)
-    this.prix = new FormControl('', Validators.required)
+  createFormControls(): void {
+    this.brand = new FormControl('', Validators.required);
+    this.title = new FormControl('', Validators.required);
+    this.description = new FormControl('', Validators.required);
+    this.price = new FormControl('', Validators.required);
   }
 
-  async submitForm() {
+  submitForm(): void {
     if (this.formProduct.valid) {
-      const formData = this.formProduct.getRawValue();
-      try {
-        const response = await lastValueFrom(this.productService.productCreatedOne(formData));
-        console.log("Produit créé avec succès :", response);
-      } catch (error) {
-        console.error("Erreur lors de la création du produit :", error);
-      }
+      const formData = this.formProduct.value;
+      console.log('Données du formulaire à envoyer :', formData);
+      this.productService.productCreatedOne(formData).subscribe(() => {
+        this.productCreated.emit();
+        this.formProduct.reset();
+      });
     } else {
       console.error("Le formulaire n'est pas valide.");
     }
   }
 
-
-  createFormModel() {
+  createFormModel(): void {
     this.formProduct = new FormGroup ({
-        marque : this.marque,
-        titre : this.titre,
+        brand : this.brand,
+        title : this.title,
         description : this.description,
-        prix : this.prix
-    })
+        price : this.price
+    });
   }
-
 }

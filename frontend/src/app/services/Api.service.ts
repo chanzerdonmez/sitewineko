@@ -38,5 +38,5 @@ export class Api
         return this.http.post(`${apiRoot}product`, productData, HttpOptions);
     }
 
-    productCreatedOne(formatData)
+    // productCreatedOne(formatData)
 }
