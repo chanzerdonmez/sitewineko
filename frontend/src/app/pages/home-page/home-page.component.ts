@@ -41,22 +41,22 @@ export class HomePageComponent implements OnInit {
       this.route.params.subscribe(params => {
         const id = params['id']
 
-        if(!id) {
-          this.vaChercherTousLesUsers()
-        } else {
-          this.VaChercherUnSeulUser(id)
-      }
+      //   if(!id) {
+      //     this.vaChercherTousLesUsers()
+      //   } else {
+      //     this.VaChercherUnSeulUser(id)
+      // }
 
       })
   }
 
-  async vaChercherTousLesUsers(): Promise<void>{
-    this.users = await this.userService.getUserAll()
-    console.log(this.users)
-  }
+  // async vaChercherTousLesUsers(): Promise<void>{
+  //   this.users = await this.userService.getUserAll()
+  //   console.log(this.users)
+  // }
 
-  async VaChercherUnSeulUser(id: string) {
-    this.users = await this.userService.getUserOne(id)
-    console.log(this.users)
-  }
+  // async VaChercherUnSeulUser(id: string) {
+  //   this.users = await this.userService.getUserOne(id)
+  //   console.log(this.users)
+  // }
 }

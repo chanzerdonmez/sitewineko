@@ -2,32 +2,32 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../components/header/header.component';
-import { ProductService } from '../../../services/product.service';
+import { ArticleService } from '../../../services/ArticleService.service';
 import { lastValueFrom } from 'rxjs';
-import { ProductModel } from '../../../models/product.model';
+import { ArticleModel } from '../../../models/article.model';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-article',
   standalone: true,
   imports: [
     ReactiveFormsModule,
     CommonModule,
     HeaderComponent
   ],
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ArticleComponent implements OnInit {
 
-  public formProduct!: FormGroup;
+  public formArticle!: FormGroup;
   public brand!: FormControl;
   public title!: FormControl;
   public description!: FormControl;
   public price!: FormControl;
 
-  @Output() productCreated: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
+  @Output() articleCreated: EventEmitter<ArticleModel> = new EventEmitter<ArticleModel>();
 
-  constructor(private productService: ProductService) { }
+  constructor(private articleService: ArticleService) { }
 
 
   ngOnInit(): void {
@@ -43,20 +43,20 @@ export class ProductComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.formProduct.valid) {
-      const formData = this.formProduct.value;
-      console.log('Données du formulaire à envoyer :', formData);
-      this.productService.productCreatedOne(formData).subscribe(() => {
-        this.productCreated.emit();
-        this.formProduct.reset();
-      });
+    if (this.formArticle.valid) {
+        const formData = this.formArticle.value;
+        console.log('Données du formulaire à envoyer :', formData);
+        this.articleService.save(formData).subscribe(() => {
+            this.articleCreated.emit();
+            this.formArticle.reset();
+        });
     } else {
-      console.error("Le formulaire n'est pas valide.");
+        console.error("Le formulaire n'est pas valide.");
     }
-  }
+}
 
   createFormModel(): void {
-    this.formProduct = new FormGroup ({
+    this.formArticle = new FormGroup ({
         brand : this.brand,
         title : this.title,
         description : this.description,

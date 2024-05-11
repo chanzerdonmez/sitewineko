@@ -1,4 +1,4 @@
-export class ProductModel {
+export class ArticleModel {
 
     constructor(
         public id: string,

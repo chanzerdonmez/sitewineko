@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class ArticleService {
-    private articlesUrl = 'http://localhost:8080/article/save';
+    private articlesUrl = 'http://localhost:8080/article/save'; // Utilisez la même URL que dans votre API Spring Boot
 
     constructor(private http: HttpClient) { }
 
