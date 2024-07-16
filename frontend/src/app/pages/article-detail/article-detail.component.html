@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<section class="py-5" *ngIf="article">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0 rounded" src="https://picsum.photos/1000/1000" alt="Image de l'article" />
+            </div>
+            <div class="col-md-6">
+                <h4 class="card-title">{{ article.brand }}</h4>
+                <br>
+                <h4 class="card-title">{{ article.title }}</h4>
+                <p class="card-text">{{ article.description }}</p>
+                <span class="card-price">{{ article.price | currency }}</span><br><br>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-primary" id="btn-panier">Ajouter au panier</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

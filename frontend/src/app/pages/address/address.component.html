@@ -1,0 +1,45 @@
+<h4 class="text-center mb-5 mt-5">Mes adresses</h4>
+
+<div class="container">
+  <form [formGroup]="formAddress" (ngSubmit)="submitAddressForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="zipCode" class="form-label">Code postal</label>
+          <input type="text" class="form-control" id="zipCode" formControlName="zipCode" aria-describedby="zipCodeHelp">
+          <div *ngIf="formAddress.get('zipCode')?.invalid && (formAddress.get('zipCode')?.dirty || formAddress.get('zipCode')?.touched)" class="text-danger">
+            <div *ngIf="formAddress.get('zipCode')?.errors?.['required']">Le code postal est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="city" class="form-label">Ville</label>
+          <input type="text" class="form-control" id="city" formControlName="city" aria-describedby="cityHelp">
+          <div *ngIf="formAddress.get('city')?.invalid && (formAddress.get('city')?.dirty || formAddress.get('city')?.touched)" class="text-danger">
+            <div *ngIf="formAddress.get('city')?.errors?.['required']">Une ville est requise.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="streetName" class="form-label">Nom de la rue</label>
+          <input type="text" class="form-control" id="streetName" formControlName="streetName" aria-describedby="streetNameHelp">
+          <div *ngIf="formAddress.get('streetName')?.invalid && (formAddress.get('streetName')?.dirty || formAddress.get('streetName')?.touched)" class="text-danger">
+            <div *ngIf="formAddress.get('streetName')?.errors?.['required']">Le nom de la rue est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="streetNumber" class="form-label">Numéro de la rue</label>
+          <input type="text" class="form-control" id="streetNumber" formControlName="streetNumber" aria-describedby="streetNumberHelp">
+          <div *ngIf="formAddress.get('streetNumber')?.invalid && (formAddress.get('streetNumber')?.dirty || formAddress.get('streetNumber')?.touched)" class="text-danger">
+            <div *ngIf="formAddress.get('streetNumber')?.errors?.['required']">Le numéro de la rue est requis.</div>
+          </div>
+        </div>
+<!-- <input type="hidden" name="id" value="{{ (currentUserId) }}"> -->
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary w-100 mt-3" id="btn-add">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

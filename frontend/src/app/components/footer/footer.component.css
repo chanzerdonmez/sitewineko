@@ -4,9 +4,16 @@
 }
 
 .card-icon {
-    color: #8A2BE2; /* Couleur violette */
+    color: #6130f2; /* Couleur violette */
 }
 
 .bloc-footer {
-    background-color: #8A2BE2;
+    background-color: #6130f2;
+    
+}
+
+#btn-newsletter {
+    background-color: #47faa9;
+    border-color: #47faa9;
+    color: #6130f2;
 }

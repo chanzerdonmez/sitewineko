@@ -1,7 +1,9 @@
 export class CategoryModel {
 
     constructor(
-        public id: string,
+        public id: number,
         public title: string,
+        public active: boolean
+
     ){}
 }

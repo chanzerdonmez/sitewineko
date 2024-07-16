@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="container mt-3">
+
+    <h3>Mon compte</h3>
+
+    <ul class="nav nav-tabs mt-3">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="profile" routerLinkActive="active">Mon profil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="address" routerLinkActive="active">Mes adresses</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="order" routerLinkActive="active">Mes commandes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="#" routerLinkActive="active">Mes retours</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="#" routerLinkActive="active">Mes favoris</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Autres</a>
+        </li>
+    </ul>
+      <router-outlet></router-outlet>
+
+</div>

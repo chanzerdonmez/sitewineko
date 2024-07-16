@@ -1,0 +1,63 @@
+
+<h4 class="text-center mb-5 mt-5">Mon profil</h4>
+
+<div class="container">
+  <form [formGroup]="formProfile" (ngSubmit)="submitProfileForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp">
+          <div *ngIf="formProfile.get('name')?.invalid && (formProfile.get('name')?.dirty || formProfile.get('name')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('name')?.errors?.['required']">Un nom est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Prénom</label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="firstNameHelp">
+          <div *ngIf="formProfile.get('firstName')?.invalid && (formProfile.get('firstName')?.dirty || formProfile.get('firstName')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('firstName')?.errors?.['required']">Un prénom est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Adresse e-mail</label>
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
+          <div *ngIf="formProfile.get('email')?.invalid && (formProfile.get('email')?.dirty || formProfile.get('email')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('email')?.errors?.['required']">L'adresse e-mail est requise.</div>
+            <div *ngIf="formProfile.get('email')?.errors?.['email']">L'adresse e-mail n'est pas valide.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Numéro de téléphone</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone" aria-describedby="phoneHelp">
+          <div *ngIf="formProfile.get('phone')?.invalid && (formProfile.get('phone')?.dirty || formProfile.get('phone')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('phone')?.errors?.['required']">Le numéro de téléphone est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="birthdate" class="form-label">Date de naissance</label>
+          <input type="date" class="form-control" id="birthdate" formControlName="birthdate" aria-describedby="birthdateHelp">
+          <div *ngIf="formProfile.get('birthdate')?.invalid && (formProfile.get('birthdate')?.dirty || formProfile.get('birthdate')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('birthdate')?.errors?.['required']">La date de naissance est requise.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+          <div *ngIf="formProfile.get('password')?.invalid && (formProfile.get('password')?.dirty || formProfile.get('password')?.touched)" class="text-danger">
+            <div *ngIf="formProfile.get('password')?.errors?.['required']">Le mot de passe est requis.</div>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary w-100 mt-3" id="btn-register">Mettre à jour</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

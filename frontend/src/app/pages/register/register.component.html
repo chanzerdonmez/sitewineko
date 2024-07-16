@@ -1,0 +1,60 @@
+<!-- <app-header></app-header> -->
+<h1 class="text-center mt-5" id="logo">
+  <span class="win">win</span><span class="eko">éko</span>
+</h1>
+<h5 class="text-center" id="slogan">Shoppez éko-friendly.</h5>
+
+<h4 class="text-center mb-4 mt-5">Inscription</h4>
+
+<div class="container">
+  <form [formGroup]="formRegister" (ngSubmit)="submitRegisterForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp" placeholder="Nom">
+          <div *ngIf="formRegister.controls['name'].invalid && (formRegister.controls['name'].dirty || formRegister.controls['name'].touched)" class="text-danger">
+            <div *ngIf="formRegister.controls['name'].errors?.['required']">Un nom est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="firstNameHelp" placeholder="Prénom">
+          <div *ngIf="formRegister.controls['firstName'].invalid && (formRegister.controls['firstName'].dirty || formRegister.controls['firstName'].touched)" class="text-danger">
+            <div *ngIf="formRegister.controls['firstName'].errors?.['required']">Un prénom est requis.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Adresse e-mail">
+          <div *ngIf="formRegister.controls['email'].invalid && (formRegister.controls['email'].dirty || formRegister.controls['email'].touched)" class="text-danger">
+            <div *ngIf="formRegister.controls['email'].errors?.['required']">L'adresse e-mail est requise.</div>
+            <div *ngIf="formRegister.controls['email'].errors?.['email']">L'adresse e-mail n'est pas valide.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
+          <div *ngIf="formRegister.controls['password'].invalid && (formRegister.controls['password'].dirty || formRegister.controls['password'].touched)" class="text-danger">
+            <div *ngIf="formRegister.controls['password'].errors?.['required']">Le mot de passe est requis.</div>
+            <div *ngIf="formRegister.controls['password'].errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères.</div>
+          </div>
+          <div id="passwordHelp" class="form-text">Votre mot de passe doit contenir au moins 8 caractères.</div>
+        </div>
+
+        <button type="submit" id="btn-register" class="btn btn-primary w-100">S'inscrire</button>
+        <div class="mb-3">
+          <p id="emailHelp" class="form-text">Vous avez déjà un compte ? <a href="#">Se connecter</a></p>
+        </div>
+
+        <!-- Message de confirmation -->
+        <div *ngIf="confirmationMessage" id="msg-confirmation" class="alert alert-success mt-3">
+          {{ confirmationMessage }}
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- <app-footer></app-footer> -->

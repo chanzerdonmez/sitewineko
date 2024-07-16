@@ -1,0 +1,62 @@
+<div class="container mt-3">
+  <h5 class="mb-3 mt-5">Ajouter ou modifier un utilisateur</h5>
+  
+  <form [formGroup]="formUser" (ngSubmit)="submitForm()" novalidate>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="name" placeholder="" formControlName="name">
+      <p *ngIf="name.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Prénom</label>
+      <input type="text" class="form-control" id="firstName" placeholder="" formControlName="firstName">
+      <p *ngIf="firstName.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Adresse e-mail</label>
+      <input type="text" class="form-control" id="email" placeholder="" formControlName="email">
+      <p *ngIf="email.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" class="form-control" id="password" placeholder="" formControlName="password">
+      <p *ngIf="password.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="role" class="form-label">Rôle</label>
+      <select class="form-select" id="role" formControlName="role">
+        <option value="CLIENT">Client</option>
+        <option value="ADMIN">Administrateur</option>
+        <option value="SUPERADMIN">Super Administrateur</option>
+      </select>
+      <p *ngIf="formUser.get('role')?.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <button id="btn-valid" type="submit" class="btn btn-primary">Valider l'utilisateur</button>
+  </form>
+
+  <h5 class="mb-3 mt-5">Liste des utilisateurs existants</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rôle</th>
+        <th scope="col">Date de création</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.dateCreation | date }}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="selectUser(user.id)">Modifier</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

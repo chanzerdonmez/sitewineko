@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<h4 class="text-center mb-5 mt-5">{{ categoryTitle }}</h4> <!-- Afficher le titre de la catégorie -->
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="article-list d-flex flex-wrap justify-content-center">
+        <!-- Utilisation de ng-container pour une meilleure gestion des boucles -->
+        <ng-container *ngFor="let article of articles; let i = index">
+          <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Utilisation de col-lg-3 pour 4 cartes par ligne sur largeur LG -->
+            <app-card [article]="article"></app-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

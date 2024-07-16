@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { UserModel } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,5 +11,4 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user-displayer.component.css'
 })
 export class UserDisplayerComponent {
-  @Input() tuyauDeUsers!: UserModel[]
 }

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcZsQgqAAAAAOqDZEK_qv73-3SbJ6xUan51MBs6"></script>
+
 </head>
 
 <body>
@@ -27,6 +29,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
         <!-- Inclure Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LcZsQgqAAAAAOqDZEK_qv73-3SbJ6xUan51MBs6"></script>
+
     </head>
 
     <body>
@@ -35,20 +39,17 @@
             <div class="container-fluid d-flex justify-content-center align-items-center">
                 <!-- Mettre le logo "Winéko" à gauche -->
                 <!-- Placer l'icône du panier à droite -->
-
-                <span class="navbar-text text-light">
+                <span class="navbar-text text-custom">
                     <!-- Livraison gratuite exclusivement via l'application. -->
-                    Obtenez -10% avec le code WIN10 via notre appli' !                </span>
+                    Obtenez -10% avec le code WIN10 via notre appli' !
+                </span>
             </div>
         </nav>
+        
 
-
-
-
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" id="logo" href="#">Winéko #ÉkoFriendly</a>
+                <a class="navbar-brand" id="logo" href="#">Winéko</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -62,53 +63,54 @@
                                 Nos rayons
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Tous les produits</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/category', 'Tous les produits']">Tous les produits</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
 
-                                <li><a class="dropdown-item" href="#">Électroménager</a></li>
-                                <li><a class="dropdown-item" href="#">Jouets et jeux</a></li>
-                                <li><a class="dropdown-item" href="#">Téléphonie et accessoires</a></li>
-                                <li><a class="dropdown-item" href="#">Jeux vidéos et consoles</a></li>
-                                <li><a class="dropdown-item" href="#">Vêtements et accessoires</a></li>
-                                <li><a class="dropdown-item" href="#">Maison et jardin</a></li>
-                                <li><a class="dropdown-item" href="#">Informatique et bureautique</a></li>
-                                <li><a class="dropdown-item" href="#">Santé et bien-être</a></li>
-                                <li><a class="dropdown-item" href="#">Sports et loisirs</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Seconde vie</a></li>
+                                <li *ngFor="let category of categories">
+                                    <a class="dropdown-item" [routerLink]="['/category', category.title]">{{ category.title }}</a>
+                                  </li>
 
                             </ul>
+
                         </li>
                         <!-- <a class="nav-link active" aria-current="page" href="#">Nouveautés</a> -->
 
                         <a class="nav-link" href="#">Bons plans</a>
                         <a class="nav-link" href="#">Pourquoi nous choisir ?</a>
+                        
+
                     </div>
                     <div class="navbar-nav ms-lg-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+
+                        <li *ngIf="loggedIn" class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Mon compte
                             </a>
+
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Profil</a></li>
-
-
-                                <li><a class="dropdown-item" href="#">Commandes</a></li>
-                                <li><a class="dropdown-item" href="#">Paramètres</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Se déconnecter</a></li>
-           
-
+                                <li><a class="dropdown-item" routerLink="/dashboard">Dashboard</a></li>
+                                <hr class="dropdown-divider">
+                                <li><a class="dropdown-item" routerLink="/my-account/profile">Mon profil</a></li>
+                                <li><a class="dropdown-item" routerLink="/my-account/address">Mes adresses</a></li>
+                                <li><a class="dropdown-item" href="#">Mes commandes</a></li>
+                                <li><a class="dropdown-item" href="#">Mes retours</a></li>
+                                <li><a class="dropdown-item" href="#">Aide</a></li>
+                                <hr class="dropdown-divider">
+                                <li><a class="dropdown-item" href="#">Contactez-nous</a></li>
 
                             </ul>
-                        </li>                        <a class="nav-link no-padding-right" routerLink="/cart">Panier (0)</a>
+                        </li>
+
+                        <a *ngIf="!loggedIn" class="nav-link active" routerLink="/login">Connexion</a>
+                        <a *ngIf="loggedIn" class="nav-link active" (click)="logout()">Déconnexion</a>
+                        
+
+                    
+                        <!-- Lien du panier, toujours visible -->
+                        <a class="nav-link no-padding-right" routerLink="/cart">Panier (0)</a>
                     </div>
                 </div>
 

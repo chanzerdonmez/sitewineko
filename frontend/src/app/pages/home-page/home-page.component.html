@@ -1,39 +1,31 @@
 <app-header></app-header>
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
-      </div>
-      <div class="carousel-item">
-        <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
-      </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img src="/assets/images/slide1200.png" class="d-block w-100" alt="First slide">
     </div>
   </div>
+</div>
 
-  <h4 class="text-center mb-5 mt-5">Les dernières nouveautés</h4>
-
+<h4 class="text-center mb-5 mt-5">Nos dernières nouveautés</h4>
 
 <div class="d-flex flex-wrap justify-content-center">
-
-<app-card></app-card>
-<app-card></app-card>
-<app-card></app-card>
-<app-card></app-card>
-
+  <app-card *ngFor="let article of recentArticles" [article]="article"></app-card>
 </div>
 
-<h4 class="text-center mb-5 mt-5">Shoppez #ÉkoFriendly avec notre app'</h4>
+<h4 class="text-center mb-5 mt-5">Shoppez éko friendly depuis notre app'</h4>
 
 <div class="container">
-    <div class="text-center px-md-5"> <!-- Ajout de px-md-5 pour une marge horizontale uniforme sur les tailles d'écrans MD et supérieures -->
-        <img class="card-img-top rounded img-fluid" src="https://picsum.photos/800/250" alt="..." />
-    </div>
-    <div class="my-5"></div> <!-- Utilisation de la classe Bootstrap "my-4" pour ajouter de l'espace -->
+  <div class="text-center px-md-5">
+    <img class="card-img-top rounded img-fluid" src="/assets/images/abcdef.png" alt="..." />
+  </div>
+  <div class="my-5"></div>
 </div>
-
-
 
 <app-footer></app-footer>

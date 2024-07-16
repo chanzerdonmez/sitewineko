@@ -1,50 +1,128 @@
-<app-header></app-header>
 
-<div class="container">
 
-    <form [formGroup]="formArticle" (ngSubmit)="submitForm()" novalidate>
-        <div class="mb-3">
-            <label for="title" class="form-label">Titre</label>
-            <input type="text" class="form-control" [ngClass]="{
+
+
+<div class="container mt-3">
+
+
+
+    <h5 class="mb-3 mt-5">Ajouter ou modifier un article</h5>
+
+  <form [formGroup]="formArticle" (ngSubmit)="submitForm()" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Titre</label>
+      <input type="text" class="form-control" [ngClass]="{
                 'has-danger': title.invalid && (title.dirty || title.touched),
                 'has-success': title.invalid && (title.dirty || title.touched),
-            }" id="title" placeholder="Titre de l'article" formControlName="title">
-            <p *ngIf="title.errors?.['required']">Champs obligatoire !</p>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" [ngClass]="{
+            }" id="title" placeholder="" formControlName="title">
+      <p *ngIf="title.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <input type="hidden" id="id" formControlName="id">
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" [ngClass]="{
                 'has-danger': description.invalid && (description.dirty || description.touched),
                 'has-success': description.invalid && (description.dirty || description.touched),
-            }" id="description" rows="3" placeholder="Description de l'article"
-                formControlName="description"></textarea>
-            <p *ngIf="description.errors?.['required']">Champs obligatoire !</p>
-
-        </div>
-        <div class="mb-3">
-            <label for="brand" class="form-label">Marque</label>
-            <input type="text" class="form-control" [ngClass]="{
+            }" id="description" rows="3" placeholder=""
+        formControlName="description"></textarea>
+      <p *ngIf="description.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="brand" class="form-label">Marque</label>
+      <input type="text" class="form-control" [ngClass]="{
                 'has-danger': brand.invalid && (brand.dirty || brand.touched),
                 'has-success': brand.invalid && (brand.dirty || brand.touched),
-            }" id="brand" placeholder="Marque de l'article" formControlName="brand">
-            <p *ngIf="brand.errors?.['required']">Champs obligatoire !</p>
-
-        </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">Prix</label>
-            <input type="text" class="form-control" [ngClass]="{
+            }" id="brand" placeholder="" formControlName="brand">
+      <p *ngIf="brand.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Prix</label>
+      <input type="text" class="form-control" [ngClass]="{
                 'has-danger': price.invalid && (price.dirty || price.touched),
                 'has-success': price.invalid && (price.dirty || price.touched),
-            }" id="price" placeholder="Prix de l'article" formControlName="price">
-            <p *ngIf="price.errors?.['required']">Champs obligatoire !</p>
+            }" id="price" placeholder="" formControlName="price">
+      <p *ngIf="price.errors?.['required']">Ce champ est obligatoire</p>
+    </div>
 
-        </div>
-        <button type="submit" class="btn btn-primary">Valider</button>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Image</label>
+        <input class="form-control" type="file" id="formFile">
+        <p *ngIf="price.errors?.['required']">Ce champ est obligatoire</p>
 
-    </form>
+    </div>
+
+    <div class="mb-3">
+        <label for="category" class="form-label">Catégorie</label>
+        <select id="category" class="form-select" formControlName="category">
+          <option value="" disabled selected>Choisir une catégorie</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.title }}</option>
+        </select>
+        <p *ngIf="formArticle.get('category')?.errors?.['required']">Ce champ est obligatoire</p>
+      </div>
+      
+    <button id="btn-valid" type="submit" class="btn btn-primary">Valider l'article</button>
+  </form>
+
+  <h5 class="mb-3 mt-5">Liste des articles existants</h5>       
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Marque</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Date de création</th>
+
+        <th scope="col">Actif</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let article of articles">
+        <td>{{ article.brand }}</td>
+
+        <td>{{ article.title | slice:0:20 }}{{ article.title.length > 20 ? '...' : '' }}</td>
+        <td>{{ article.description | slice:0:30 }}{{ article.description.length > 30 ? '...' : '' }}</td>
+            
+        <td>{{ article.price | currency: 'EUR':'symbol':'1.2-2':'fr' }}</td>
+        <td>{{ article.category?.title }}</td>
+        <td>{{ article.dateCreation | date }}</td>
 
 
+        <td>
+            <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+          </div>
+        </td>
 
+        <td>
+            <!-- <div class="btn-group" role="group"> -->
+                <button type="button" class="btn btn-primary" (click)="updateArticle(article.id)">Modifier</button>
+                <button type="button" class="btn btn-secondary mx-2"(click)="getByIdArticle(article.id)">Voir</button>
+                <button type="button" class="btn btn-danger" (click)="deepDeleteArticle(article.id)">Supprimer</button>
 
+            <!-- </div> -->
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <nav aria-label="Page navigation example">
+    <ul class="pagination custom-pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+      </li>
+      <li class="page-item" id="btn-number2" *ngFor="let pageNumber of getPageNumbers()" [class.active]="pageNumber === currentPage">
+        <button id="btn-number" class="page-link" (click)="onPageChange(pageNumber)">{{ pageNumber }}</button>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+        <button class="page-link" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === getTotalPages()">Suivant</button>
+      </li>
+    </ul>
+  </nav> -->
 
 </div>

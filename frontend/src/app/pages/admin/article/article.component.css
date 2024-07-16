@@ -1,0 +1,29 @@
+#btn-valid {
+    /* background-color: #8A2BE2;
+    border-color: #8A2BE2; */
+}
+
+.custom-pagination .page-link {
+    color: #343a40; /* Couleur du texte */
+    background-color: transparent; /* Fond transparent */
+    border: 1px solid #343a40; /* Bordure */
+  }
+  
+  .custom-pagination .page-link:hover {
+    background-color: #343a40; /* Fond violet au survol */
+    color: #fff; /* Texte blanc au survol */
+    border-color: #343a40; /* Bordure violette au survol */
+  }
+  
+  .custom-pagination .page-item.active .page-link {
+    background-color: #343a40; /* Fond violet de l'élément actif */
+    border-color: #343a40; /* Bordure violette de l'élément actif */
+    color: #fff; /* Texte blanc de l'élément actif */
+  }
+  
+  .custom-pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Couleur du texte de l'élément désactivé */
+    background-color: transparent; /* Fond transparent de l'élément désactivé */
+    border-color: #343a40; /* Bordure violette de l'élément désactivé */
+  }
+  

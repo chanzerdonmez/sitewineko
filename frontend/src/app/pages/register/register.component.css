@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+#btn-register {
+    background-color: #6130f2;
+    border-color: #6130f2;
+    font-family: "DM Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: 400;
+font-style: normal;
+}
+
+#msg-confirmation {
+    background-color: #666666;
+    border-color: #666666;
+    color: white;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+}
+
+#logo {
+/* color: #8A2BE2; */
+/* color: #6130f2; */
+font-family: "DM Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: 600;
+font-style: normal;
+/* font-size: xxx-large; */
+font-size: 6rem; /* Vous pouvez également essayer 80px */
+
+}
+
+h4 {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+}
+
+#slogan {
+    /* color: #8A2BE2; */
+    color: #666666;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    }
+
+    .win {
+        color: #6130f2; /* Couleur actuelle pour "Win" */
+      }
+      .eko {
+        color: #46ffac;
+      }
+
+::placeholder {
+        opacity: 0.5; /* Réduisez cette valeur pour augmenter la transparence */
+        color: #666666;
+        font-family: "DM Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+      }
+      

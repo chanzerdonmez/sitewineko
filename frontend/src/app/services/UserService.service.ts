@@ -1,36 +1,73 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { UserModel } from "../models/user.model";
-// import { ApiService } from "./ApiService.service";
-import { lastValueFrom } from "rxjs";
+import { tap } from "rxjs";
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
-export class UserService
-{
-    constructor(
-        // private apiService: ApiService
-    ){}
+export class UserService {
+  private usersUrl = 'http://localhost:8080/api/open';
+  private usersUrl2 = 'http://localhost:8080/api/users';
+  private _loggedIn: boolean = false;
 
-        // methode de service pour recup
-        // tous les users
-    //     async getUserAll(){
-    //         let res = await lastValueFrom(this.apiService.retrieveAllUsers())
-    //         return this.formatData(res)
-    //     }
+  constructor(private http: HttpClient) {}
 
-    //     async getUserOne(id: string){
-    //         let res = await lastValueFrom(this.apiService.retrieveOneUser(id))
-    //         return this.formatData([res])
-    //     }
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.usersUrl}/login`, credentials, { withCredentials: true }).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          console.log('Token received:', response.token);
+        }
+      })
+    );
+  }
 
-    // formatData(rawdata: any[]) {
-    //         const temp: UserModel[] = []
-    //         rawdata.map((el) => {
-    //             let tempObj: UserModel = new UserModel(el.id, el.name, el.username, el.email)
-    //             temp.push(tempObj);
-    //         })
-    //  console.log('Data Formatté: ', temp)
-    //  return temp
-    // }
+  register(user: UserModel): Observable<any> {
+    return this.http.post<any>(`${this.usersUrl}/register`, user);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  get loggedIn(): boolean {
+    return this._loggedIn;
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this._loggedIn = false;
+  }
+
+  getUsers(): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(`${this.usersUrl2}/users/get/all`).pipe(
+      tap(
+        data => console.log("Users fetched successfully:", data),
+        error => console.error("Error fetching users:", error)
+      )
+    );
+  }
+
+  getUserById(id: number): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.usersUrl2}/get/${id}`);
+  }
+
+  updateUser(id: number, user: UserModel): Observable<UserModel> {
+    return this.http.patch<UserModel>(`${this.usersUrl2}/${id}`, user);
+  }
+
+  getCurrentUser(): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.usersUrl2}/me`);
+  }
 }
+
+
+
+
+
+
+
+
+

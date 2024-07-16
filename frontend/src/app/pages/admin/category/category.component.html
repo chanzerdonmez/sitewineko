@@ -1,0 +1,54 @@
+
+
+<div class="container mt-3">
+
+
+
+    <h5 class="mb-3 mt-5">Ajouter ou modifier une catégorie</h5>
+
+  <form [formGroup]="formCategory" (ngSubmit)="submitForm()" novalidate>
+      <div class="mb-3">
+          <label for="title" class="form-label">Titre</label>
+          <input type="text" class="form-control" [ngClass]="{
+              'has-danger': title.invalid && (title.dirty || title.touched),
+              'has-success': title.valid && (title.dirty || title.touched)
+          }" id="title" placeholder="" formControlName="title">
+          <p *ngIf="title.errors?.['required']">Ce champ est obligatoire</p>
+      </div>
+      <input type="hidden" id="id" formControlName="id">
+      <button id="btn-valid" type="submit" class="btn btn-primary">Valider la catégorie</button>
+  </form>
+  
+
+<h5 class="mb-3 mt-5">Liste des catégories existantes</h5>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Titre</th>
+        <th scope="col">Actif</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.title }}</td>
+          <td>
+            <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+          </div>
+        </td>
+          <td>
+              <!-- <div class="btn-group" role="group"> -->
+                <button type="button" class="btn btn-primary" (click)="updateCategory(category.id)">Modifier</button>
+                <button type="button" class="btn btn-secondary mx-2">Voir</button>
+                <button type="button" class="btn btn-danger">Supprimer</button>
+              <!-- </div> -->
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
