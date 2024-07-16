@@ -1,0 +1,69 @@
+<app-header></app-header>
+
+<h4 class="text-center mb-5 mt-5">Connexion</h4>
+
+<div class="container">
+  <form [formGroup]="formLogin" (ngSubmit)="submitLoginForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="email" class="form-label">Adresse e-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            aria-describedby="emailHelp"
+          />
+
+          @if (
+            formLogin.controls["email"].invalid &&
+            (formLogin.controls["email"].dirty ||
+              formLogin.controls["email"].touched)
+          ) {
+            <div class="text-danger">
+              @if (formLogin.controls["email"].errors?.["required"]) {
+                <div>L'adresse e-mail est requise.</div>
+              }
+              @if (formLogin.controls["email"].errors?.["email"]) {
+                <div>L'adresse e-mail n'est pas valide.</div>
+              }
+            </div>
+          }
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+          @if (
+            formLogin.controls["password"].invalid &&
+            (formLogin.controls["password"].dirty ||
+              formLogin.controls["password"].touched)
+          ) {
+            <div class="text-danger">
+              @if (formLogin.controls["password"].errors?.["required"]) {
+                <div>Le mot de passe est requis.</div>
+              }
+            </div>
+          }
+          <div id="passwordHelp" class="form-text">
+            Mot de passe oublié ? Cliquez ici
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="btn-connect">
+          Se connecter
+        </button>
+        <div class="mb-3">
+          <p id="emailHelp" class="form-text">
+            Vous n'avez pas encore de compte ?
+            <a routerLink="/register">S'inscrire ici</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
