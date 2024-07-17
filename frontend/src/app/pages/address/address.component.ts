@@ -26,10 +26,6 @@ export class AddressComponent implements OnInit {
   public zipCode!: FormControl;
   private currentUserId: number | null = null;
 
-  // fabriquer methode private
-  // recuperer le cookie
-  // AddMe route côté back email et token envoyer, 
-
   constructor(private addressService: AddressService, private userService: UserService) {}
 
   ngOnInit(): void {
@@ -40,7 +36,7 @@ export class AddressComponent implements OnInit {
       streetNumber: this.streetNumber,
       zipCode: this.zipCode,
     });
-  
+
     this.userService.getCurrentUser().subscribe(
       user => {
         this.currentUserId = user.id;
@@ -51,7 +47,6 @@ export class AddressComponent implements OnInit {
       }
     );
   }
-  
 
   initializeFormControls(): void {
     this.city = new FormControl('', Validators.required);
@@ -61,84 +56,33 @@ export class AddressComponent implements OnInit {
   }
 
   submitForm(): void {
-    if (this.formAddress.valid) {
-      const formData = this.formAddress.value as AddressModel;
-
-      if (this.currentUserId !== null) {
-        formData.userId = this.currentUserId;
-
-        if (formData.id) {
-          this.addressService.update(formData.id, formData).subscribe(
-            (updatedAddress) => {
-              console.log('Adresse mise à jour avec succès :', updatedAddress);
-              this.formAddress.reset();
-              this.loadAddress();
-            },
-            (error) => {
-              console.error('Erreur lors de la mise à jour de l\'adresse :', error);
-            }
-          );
-        } else {
-          this.addressService.save(formData).subscribe(
-            (savedAddress) => {
-              console.log('Adresse sauvegardée avec succès :', savedAddress);
-              this.formAddress.reset();
-              this.loadAddress();
-            },
-            (error) => {
-              console.error('Erreur lors de la sauvegarde de l\'adresse :', error);
-            }
-          );
-        }
-      } else {
-        console.error('User ID is not set.');
-      }
-    } else {
-      console.error('Le formulaire n\'est pas valide.');
-    }
-  }
-
-
-  submitAddressForm(): void {
     if (this.formAddress.valid && this.currentUserId !== null) {
       const formData = this.formAddress.value as AddressModel;
       formData.userId = this.currentUserId;
 
-      this.addressService.save(formData).subscribe(
-        savedAddress => {
-          console.log('Adresse sauvegardée avec succès :', savedAddress);
-          this.formAddress.reset();
-        },
-        error => {
-          console.error('Erreur lors de la sauvegarde de l\'adresse :', error);
-        }
-      );
+      if (formData.id) {
+        this.addressService.update(formData.id, formData).subscribe(
+          (updatedAddress) => {
+            console.log('Adresse mise à jour avec succès :', updatedAddress);
+            this.formAddress.reset();
+          },
+          (error) => {
+            console.error('Erreur lors de la mise à jour de l\'adresse :', error);
+          }
+        );
+      } else {
+        this.addressService.save(formData).subscribe(
+          (savedAddress) => {
+            console.log('Adresse sauvegardée avec succès :', savedAddress);
+            this.formAddress.reset();
+          },
+          (error) => {
+            console.error('Erreur lors de la sauvegarde de l\'adresse :', error);
+          }
+        );
+      }
     } else {
       console.error('Le formulaire n\'est pas valide ou l\'ID utilisateur est manquant.');
     }
   }
-
-  updateAddress(id: number): void {
-    this.addressService.getAddressById(id).subscribe(
-      (address: AddressModel) => {
-        this.formAddress.patchValue({
-          id: address.id,
-          city: address.city,
-          streetName: address.streetName,
-          streetNumber: address.streetNumber,
-          zipCode: address.zipCode,
-          userId: address.userId // Assurez-vous que ce champ est mis à jour
-        });
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération de l\'adresse pour mise à jour', error);
-      }
-    );
-  }
-
-  loadAddress(): void {
-    // Implémentation pour recharger les adresses
-  }
-
-  
 }
