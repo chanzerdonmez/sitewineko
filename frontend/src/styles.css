@@ -1,2 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+button, #button {
+    background-color: #6130f2 !important;
+    border-color: #6130f2 !important;
+}
+
+/* button:hover {
+    background-color: #4c29d8 !important;
+    border-color: #4c29d8 !important;
+} */
+
+body {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: #2e2e2e;
+}
+
+.card-price {
+    font-weight: 700;
+}
+
