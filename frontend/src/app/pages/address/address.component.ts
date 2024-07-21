@@ -12,7 +12,7 @@ import { UserService } from '../../services/UserService.service';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    HeaderComponent,
+    HeaderComponent
   ],
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css']
@@ -24,7 +24,7 @@ export class AddressComponent implements OnInit {
   public streetName!: FormControl;
   public streetNumber!: FormControl;
   public zipCode!: FormControl;
-  private currentUserId: number | null = null;
+  public userId!: FormControl;
 
   constructor(private addressService: AddressService, private userService: UserService) {}
 
@@ -35,17 +35,10 @@ export class AddressComponent implements OnInit {
       streetName: this.streetName,
       streetNumber: this.streetNumber,
       zipCode: this.zipCode,
+      userId: this.userId
     });
 
-    this.userService.getCurrentUser().subscribe(
-      user => {
-        this.currentUserId = user.id;
-        console.log('Current user ID:', this.currentUserId);
-      },
-      error => {
-        console.error("Error fetching current user:", error);
-      }
-    );
+    this.setUserId();
   }
 
   initializeFormControls(): void {
@@ -53,36 +46,42 @@ export class AddressComponent implements OnInit {
     this.streetName = new FormControl('', Validators.required);
     this.streetNumber = new FormControl('', Validators.required);
     this.zipCode = new FormControl('', Validators.required);
+    this.userId = new FormControl('', Validators.required);
+  }
+
+  setUserId(): void {
+    this.userService.getUserInfo().subscribe(
+      data => {
+        if (data && data.id) {
+          this.userId.setValue(data.id);
+        }
+      },
+      error => {
+        console.error('Error fetching user info', error);
+      }
+    );
   }
 
   submitForm(): void {
-    if (this.formAddress.valid && this.currentUserId !== null) {
-      const formData = this.formAddress.value as AddressModel;
-      formData.userId = this.currentUserId;
+    if (this.formAddress.valid) {
+      const formData = this.formAddress.value;
 
-      if (formData.id) {
-        this.addressService.update(formData.id, formData).subscribe(
-          (updatedAddress) => {
-            console.log('Adresse mise à jour avec succès :', updatedAddress);
-            this.formAddress.reset();
-          },
-          (error) => {
-            console.error('Erreur lors de la mise à jour de l\'adresse :', error);
-          }
-        );
-      } else {
-        this.addressService.save(formData).subscribe(
-          (savedAddress) => {
-            console.log('Adresse sauvegardée avec succès :', savedAddress);
-            this.formAddress.reset();
-          },
-          (error) => {
-            console.error('Erreur lors de la sauvegarde de l\'adresse :', error);
-          }
-        );
-      }
+      this.addressService.save(formData).subscribe(
+        (savedAddress) => {
+          console.log('Address saved successfully:', savedAddress);
+          this.formAddress.reset();
+        },
+        (error) => {
+          console.error('Error saving address:', error);
+        }
+      );
     } else {
-      console.error('Le formulaire n\'est pas valide ou l\'ID utilisateur est manquant.');
+      console.log('City valid:', this.city.valid);
+      console.log('Street name valid:', this.streetName.valid);
+      console.log('Street number valid:', this.streetNumber.valid);
+      console.log('Zip code valid:', this.zipCode.valid);
+      console.log('User ID:', this.userId.value);
+      console.error('Form is not valid.');
     }
   }
 }

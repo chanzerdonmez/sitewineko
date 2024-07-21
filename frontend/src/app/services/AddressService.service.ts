@@ -23,14 +23,18 @@ export class AddressService {
     }
 
     save(address: AddressModel): Observable<AddressModel> {
-        const headers = this.getHeaders();
-
-        return this.http.post<AddressModel>(this.addressUrl, address, { headers })
-            .pipe(catchError((error: any) => {
-                console.error('Une erreur s\'est produite lors de la sauvegarde de l\'adresse :', error);
-                throw error;
-            }));
-    }
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json'
+        });
+    
+        return this.http.post<AddressModel>(this.addressUrl, address, { headers, withCredentials: true })
+          .pipe(
+            catchError((error: any) => {
+              console.error('Error saving address:', error);
+              throw error;
+            })
+          );
+      }
 
     update(id: number, updatedAddress: AddressModel): Observable<AddressModel> {
         const url = `${this.apiUrl}/update/${id}`;
