@@ -38,6 +38,8 @@ export class ArticleComponent implements OnInit {
   public category!: FormControl;
   public articles: ArticleModel[] = [];
   public categories: CategoryModel[] = [];
+  private selectedFile!: File;
+
 
  // public currentPage: number = 1; // Page courante
  // public itemsPerPage: number = 10; // Nombre d'articles par page
@@ -58,6 +60,10 @@ export class ArticleComponent implements OnInit {
 
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
   submitForm(): void {
     if (this.formArticle.valid) {
       const formData = this.formArticle.value as ArticleModel;
@@ -70,6 +76,9 @@ export class ArticleComponent implements OnInit {
           this.articleService.update(formData.id, formData).subscribe(
             (updatedArticle) => {
               console.log('Article mis à jour avec succès :', updatedArticle);
+              if (this.selectedFile) {
+                this.uploadImage(formData.id);
+              }
               this.formArticle.reset();
               this.loadArticles();
             },
@@ -83,6 +92,9 @@ export class ArticleComponent implements OnInit {
           this.articleService.save(formData).subscribe(
             (savedArticle) => {
               console.log('Article sauvegardé avec succès :', savedArticle);
+              if (this.selectedFile) {
+                this.uploadImage(savedArticle.id);
+              }
               this.formArticle.reset();
               this.loadArticles();
             },
@@ -126,7 +138,6 @@ export class ArticleComponent implements OnInit {
     );
   }
   
-
   deepDeleteArticle(id: number) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
         this.articleService.deepDeleteArticle(id).subscribe(
@@ -146,9 +157,6 @@ export class ArticleComponent implements OnInit {
     }
 }
 
-
-  
-  
 updateArticle(id: number) {
   this.articleService.getArticleById(id).subscribe(
     (article: ArticleModel) => {
@@ -196,7 +204,6 @@ updateArticle(id: number) {
     });
   }
 
-
   loadArticles(): void {
     this.articleService.getAll().subscribe(
       (articles: ArticleModel[]) => {
@@ -209,7 +216,6 @@ updateArticle(id: number) {
       }
     );
   }
-
 
   getByIdArticle(id: number) {
     this.router.navigate(['/article', id]);
@@ -232,5 +238,20 @@ updateArticle(id: number) {
 //   this.currentPage = pageNumber;
 // }
 
+
+
+private uploadImage(articleId: number): void {
+  const formData = new FormData();
+  formData.append('image', this.selectedFile, this.selectedFile.name);
+  this.articleService.uploadImage(articleId, formData).subscribe(
+    (response) => {
+      console.log('Image uploaded successfully:', response);
+      this.loadArticles();
+    },
+    (error) => {
+      console.error('Error uploading image:', error);
+    }
+  );
+}
 
 }

@@ -52,9 +52,10 @@
         <td>{{ user.firstName }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
-        <td>{{ user.dateCreation | date }}</td>
+        <td>{{ user.dateCreation | date:'dd/MM/yyyy' }}</td>
         <td>
           <button type="button" class="btn btn-primary" (click)="selectUser(user.id)">Modifier</button>
+          <button type="button" class="btn btn-danger mx-2">Supprimer</button>
         </td>
       </tr>
     </tbody>

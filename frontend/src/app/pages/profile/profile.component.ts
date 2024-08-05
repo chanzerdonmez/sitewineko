@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
   public formProfile!: FormGroup;
   public name!: FormControl;
   public firstName!: FormControl;
+  public phone!: FormControl;       // Ajout du contrôle phone
+  public birthdate!: FormControl;  
   public email!: FormControl;
   public password!: FormControl;
 
@@ -30,6 +32,8 @@ export class ProfileComponent implements OnInit {
       name: this.name,
       firstName: this.firstName,
       email: this.email,
+      phone: this.phone,          // Ajout du contrôle phone au groupe
+      birthdate: this.birthdate,  
       password: this.password
     });
   }
@@ -38,6 +42,8 @@ export class ProfileComponent implements OnInit {
     this.name = new FormControl('', [Validators.required]);
     this.firstName = new FormControl('', [Validators.required]);
     this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.phone = new FormControl('', [Validators.required]);         // Initialisation du contrôle phone
+    this.birthdate = new FormControl('', [Validators.required]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   }
 

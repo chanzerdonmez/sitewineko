@@ -44,12 +44,18 @@
       <p *ngIf="price.errors?.['required']">Ce champ est obligatoire</p>
     </div>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
         <label for="formFile" class="form-label">Image</label>
         <input class="form-control" type="file" id="formFile">
         <p *ngIf="price.errors?.['required']">Ce champ est obligatoire</p>
 
-    </div>
+    </div> -->
+
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Image</label>
+      <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
+      <p *ngIf="price.errors?.['required']">Ce champ est obligatoire</p>
+  </div>
 
     <div class="mb-3">
         <label for="category" class="form-label">Catégorie</label>
@@ -83,12 +89,12 @@
       <tr *ngFor="let article of articles">
         <td>{{ article.brand }}</td>
 
-        <td>{{ article.title | slice:0:20 }}{{ article.title.length > 20 ? '...' : '' }}</td>
-        <td>{{ article.description | slice:0:30 }}{{ article.description.length > 30 ? '...' : '' }}</td>
+        <td>{{ article.title | slice:0:13 }}{{ article.title.length > 13 ? '...' : '' }}</td>
+        <td>{{ article.description | slice:0:23 }}{{ article.description.length > 23 ? '...' : '' }}</td>
             
         <td>{{ article.price | currency: 'EUR':'symbol':'1.2-2':'fr' }}</td>
         <td>{{ article.category?.title }}</td>
-        <td>{{ article.dateCreation | date }}</td>
+        <td>{{ article.dateCreation | date:'dd/MM/yyyy' }}</td>
 
 
         <td>

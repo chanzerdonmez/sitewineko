@@ -3,6 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CategoryService } from '../../services/CategoryService.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/UserService.service';
+import { SaveUser } from '../../services/SaveUser.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { UserService } from '../../services/UserService.service';
     RouterLink,
     RouterLinkActive,
     CommonModule,
-    RouterLink
+    RouterLink,
     ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -25,13 +26,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private categoryService: CategoryService,
-    private userService: UserService
+    private saveUser : SaveUser
 
   ) { }
 
   ngOnInit(): void {
     this.loadCategories();
-    if(localStorage.getItem("token")){
+    if(this.saveUser.currentUserValue != null){
       this.loggedIn = true;
     }
     console.log(this.loggedIn);
@@ -49,7 +50,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.userService.logout();
+    // this.userService.logout();
     this.router.navigate(['/login']);
   }
 

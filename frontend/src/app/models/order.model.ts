@@ -10,7 +10,7 @@ export class OrderModel {
         public streetNumber: string,
         public zipCode: string,
         public dateCreation: Date,
-        public user: UserModel | null
+        public users: UserModel | null
     ) {}
 
     

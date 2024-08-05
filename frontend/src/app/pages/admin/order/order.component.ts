@@ -32,6 +32,7 @@ export class OrderComponent implements OnInit {
   loadOrders(): void {
     this.orderService.getOrders().subscribe(
       (data: OrderModel[]) => {
+        console.log(data); // Debugging: Assurez-vous que les données contiennent l'email
         this.orders = data;
       },
       (error: any) => {
@@ -39,6 +40,7 @@ export class OrderComponent implements OnInit {
       }
     );
   }
+  
 
   updateOrder(id: number): void {
     // Ajoutez ici la logique pour mettre à jour une commande

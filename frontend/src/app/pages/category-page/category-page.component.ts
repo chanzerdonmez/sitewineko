@@ -6,7 +6,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ArticleModel } from '../../models/article.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-category-page',
@@ -17,6 +17,8 @@ import { ActivatedRoute } from '@angular/router';
     FooterComponent,
     ReactiveFormsModule,
     CommonModule,
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './category-page.component.html',
   styleUrl: './category-page.component.css'

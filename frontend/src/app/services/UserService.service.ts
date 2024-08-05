@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserModel } from "../models/user.model";
 import { tap } from "rxjs";
 import { catchError } from 'rxjs/operators';
+import { SaveUser } from "./SaveUser.service";
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class UserService {
 
   private _loggedIn: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private saveUser: SaveUser) {}
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
@@ -92,9 +93,35 @@ export class UserService {
   // }
 
 
+  // getUserInfo(): Observable<any> {
+
+  //   let headers = new HttpHeaders();
+
+  //   if (this.saveUser.currentUserValue) {
+  //     headers = new HttpHeaders({
+  //       Authorization : `Bearer ${this.saveUser.currentUserValue!.token}`
+  //     });
+  //   }
+  //   return this.http.get<any>(this.apiUrl, {headers : headers});
+  // }
+
   getUserInfo(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, { withCredentials: true });
+    let headers = new HttpHeaders();
+    if (this.saveUser.currentUserValue) {
+      headers = new HttpHeaders({
+        Authorization: `Bearer ${this.saveUser.currentUserValue!.token}`
+      });
+    }
+    return this.http.get<any>(this.apiUrl, {headers : headers})
+      .pipe(
+        tap(data => console.log('User info fetched:', data)),
+        catchError(error => {
+          console.error('Error fetching user info:', error);
+          throw error;
+        })
+      );
   }
+
 }
 
 

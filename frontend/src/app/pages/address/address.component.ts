@@ -25,6 +25,8 @@ export class AddressComponent implements OnInit {
   public streetNumber!: FormControl;
   public zipCode!: FormControl;
   public userId!: FormControl;
+  public addresses: AddressModel[] = []; // Declare the addresses property
+
 
   constructor(private addressService: AddressService, private userService: UserService) {}
 
@@ -39,6 +41,8 @@ export class AddressComponent implements OnInit {
     });
 
     this.setUserId();
+    this.loadUserAddresses();
+
   }
 
   initializeFormControls(): void {
@@ -62,6 +66,18 @@ export class AddressComponent implements OnInit {
     );
   }
 
+  loadUserAddresses(): void {
+    this.addressService.getUserAddresses().subscribe(
+      addresses => {
+        this.addresses = addresses;
+      },
+      error => {
+        console.error('Error fetching user addresses', error);
+      }
+    );
+  }
+
+
   submitForm(): void {
     if (this.formAddress.valid) {
       const formData = this.formAddress.value;
@@ -70,6 +86,7 @@ export class AddressComponent implements OnInit {
         (savedAddress) => {
           console.log('Address saved successfully:', savedAddress);
           this.formAddress.reset();
+          this.loadUserAddresses(); // Recharger les adresses après en avoir ajouté une nouvelle
         },
         (error) => {
           console.error('Error saving address:', error);
@@ -84,4 +101,8 @@ export class AddressComponent implements OnInit {
       console.error('Form is not valid.');
     }
   }
+
+
+
+
 }

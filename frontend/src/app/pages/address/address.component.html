@@ -1,9 +1,9 @@
 <h4 class="text-center mb-5 mt-5">Mes adresses</h4>
 
 <div class="container">
-  <form [formGroup]="formAddress" (ngSubmit)="submitForm()" novalidate>
-    <div class="row justify-content-center">
-      <div class="col-md-6">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form [formGroup]="formAddress" (ngSubmit)="submitForm()" novalidate>
         <div class="mb-3">
           <label for="zipCode" class="form-label">Code postal</label>
           <input type="text" class="form-control" id="zipCode" formControlName="zipCode" aria-describedby="zipCodeHelp">
@@ -35,13 +35,20 @@
             <div *ngIf="formAddress.get('streetNumber')?.errors?.['required']">Le numéro de la rue est requis.</div>
           </div>
         </div>
-        <input type="hidden" formControlName="userId">
 
-<!-- <input type="hidden" name="id" value="{{ (currentUserId) }}"> -->
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary w-100 mt-3" id="btn-add">Ajouter</button>
         </div>
-      </div>
+      </form>
     </div>
-  </form>
+
+    <div class="col-md-6">
+      <h5 class="mb-3">Liste de mes adresses :</h5>
+      <ul class="list-group">
+        <li *ngFor="let address of addresses" class="list-group-item">
+          {{ address.streetNumber }} {{ address.streetName }}, {{ address.city }}, {{ address.zipCode }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

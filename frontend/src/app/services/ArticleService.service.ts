@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from "@angular/common/http";
 
+
 @Injectable({
     providedIn: 'root',
 })
@@ -18,6 +19,7 @@ export class ArticleService {
     private getRecentArticlesUrl = 'http://localhost:8080/api/article/get/recent'; // Ajoutez cette ligne
 
     private updateArticleUrl = 'http://localhost:8080/api/article/get'
+
 
     constructor(private http: HttpClient) { }
 
@@ -105,5 +107,25 @@ export class ArticleService {
                 })
             );
     }
+
+
+    // uploadImage(id: number, formData: FormData): Observable<any> {
+    //     const url = `${this.apiUrl}/upload/${id}`;
+    //     return this.http.post(url, formData)
+    //         .pipe(catchError((error: any) => {
+    //             console.error('Une erreur s\'est produite lors du téléchargement de l\'image :', error);
+    //             throw error;
+    //         }));
+    // }
+
+    uploadImage(id: number, formData: FormData): Observable<any> {
+        const url = `${this.apiUrl}/upload/${id}`;
+        return this.http.post(url, formData, { responseType: 'text' })
+            .pipe(catchError((error: any) => {
+                console.error('Une erreur s\'est produite lors du téléchargement de l\'image :', error);
+                throw error;
+            }));
+    }
+    
 
 }

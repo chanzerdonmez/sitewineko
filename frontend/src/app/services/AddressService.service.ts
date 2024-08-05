@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from "@angular/common/http";
+import { SaveUser } from "./SaveUser.service";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class AddressService {
     private addressUrl = 'http://localhost:8080/api/address/add';
     private apiUrl = 'http://localhost:8080/api/address';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private saveUser : SaveUser) { }
 
     private getHeaders(): HttpHeaders {
         return new HttpHeaders({
@@ -23,18 +24,21 @@ export class AddressService {
     }
 
     save(address: AddressModel): Observable<AddressModel> {
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json'
-        });
+        let headers = new HttpHeaders();
+    if (this.saveUser.currentUserValue) {
+      headers = new HttpHeaders({
+        Authorization: `Bearer ${this.saveUser.currentUserValue!.token}`
+      });
+    }
     
-        return this.http.post<AddressModel>(this.addressUrl, address, { headers, withCredentials: true })
+        return this.http.post<AddressModel>(this.addressUrl, address,{headers : headers})
           .pipe(
             catchError((error: any) => {
               console.error('Error saving address:', error);
               throw error;
             })
           );
-      }
+    }
 
     update(id: number, updatedAddress: AddressModel): Observable<AddressModel> {
         const url = `${this.apiUrl}/update/${id}`;
@@ -59,5 +63,18 @@ export class AddressService {
                 })
             );
     }
+
+
+
+    getUserAddresses(): Observable<AddressModel[]> {
+        const url = `${this.apiUrl}/user/addresses`;
+        return this.http.get<AddressModel[]>(url, { headers: this.getHeaders() })
+          .pipe(
+            catchError((error: any) => {
+              console.error('Error fetching user addresses:', error);
+              throw error;
+            })
+          );
+      }
 
 }
