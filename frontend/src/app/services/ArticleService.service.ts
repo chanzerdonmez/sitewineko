@@ -6,6 +6,11 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from "@angular/common/http";
 
+const httpOptions = { 
+    header: new HttpHeaders({ 'content-type': 'application/json',
+    'Accept': 'text/html, application/xhtml+xml, */*', }),
+    responseType: 'json' as 'json', withCredentials: true
+}
 
 @Injectable({
     providedIn: 'root',

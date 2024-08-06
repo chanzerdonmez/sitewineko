@@ -7,6 +7,12 @@ import { of } from 'rxjs';
 import { HttpErrorResponse } from "@angular/common/http";
 import { SaveUser } from "./SaveUser.service";
 
+const httpOptions = { 
+    header: new HttpHeaders({ 'content-type': 'application/json',
+    'Accept': 'text/html, application/xhtml+xml, */*', }),
+    responseType: 'json' as 'json', withCredentials: true
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -17,12 +23,8 @@ export class AddressService {
 
     constructor(private http: HttpClient, private saveUser : SaveUser) { }
 
-    private getHeaders(): HttpHeaders {
-        return new HttpHeaders({
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        });
-    }
 
+    
     save(address: AddressModel): Observable<AddressModel> {
         let headers = new HttpHeaders();
     if (this.saveUser.currentUserValue) {
@@ -68,7 +70,7 @@ export class AddressService {
 
     getUserAddresses(): Observable<AddressModel[]> {
         const url = `${this.apiUrl}/user/addresses`;
-        return this.http.get<AddressModel[]>(url, { headers: this.getHeaders() })
+        return this.http.get<AddressModel[]>(url, httpOptions)
           .pipe(
             catchError((error: any) => {
               console.error('Error fetching user addresses:', error);

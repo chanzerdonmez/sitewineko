@@ -32,27 +32,31 @@ export class CartComponent implements OnInit {
   loadCart(): void {
     this.cartService.getCart().subscribe(
       (cartData) => {
-        console.log('Données du panier récupérées :', cartData); // Devrait afficher le contenu du panier
+        console.log('Données du panier récupérées :', cartData);
         this.cartItems = new Map(Object.entries(cartData).map(([key, value]) => [Number(key), value]));
+        console.log('Articles du panier après conversion :', this.cartItems);
         this.loadArticles();
       },
       (error) => {
         console.error('Erreur lors du chargement du panier', error);
       }
     );
-  }
+}
 
-  loadArticles(): void {
-    this.articleService.getAll().subscribe(
-      (articles) => {
-        this.articles = articles.filter(article => this.cartItems.has(article.id));
-        this.calculateTotalPrice();
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des articles', error);
-      }
-    );
-  }
+
+loadArticles(): void {
+  this.articleService.getAll().subscribe(
+    (articles) => {
+      console.log('Tous les articles disponibles :', articles);
+      this.articles = articles.filter(article => this.cartItems.has(article.id));
+      console.log('Articles filtrés pour le panier :', this.articles);
+      this.calculateTotalPrice();
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des articles', error);
+    }
+  );
+}
 
   calculateTotalPrice(): void {
     this.totalPrice = this.articles.reduce((total, article) => {
