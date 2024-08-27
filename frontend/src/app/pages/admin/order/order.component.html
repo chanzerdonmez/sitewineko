@@ -2,27 +2,33 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Numéro de commande</th>
-      <th scope="col">Date de la commande</th>
+      <th scope="col">N° de commande</th>
+      <th scope="col">Statut</th>
+      <th scope="col">Date</th>
       <th scope="col">Email</th>
-      <th scope="col">Action</th>
+      <th scope="col">Prix total</th> <!-- Ajout d'une colonne pour le prix total -->
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
       <td>{{ order.numberOrder }}</td>
+      <td>En cours</td>
       <td>{{ order.dateCreation | date:'dd/MM/yyyy' }}</td>
-      <td>{{ order.users?.email }}</td> <!-- Vérifiez que c'est 'users' pour correspondre au modèle -->
+      <td>{{ order.userEmail }}</td> <!-- Utiliser userEmail ici -->
       <!-- <td>
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
           <label class="form-check-label" for="flexSwitchCheckChecked"></label>
         </div>
       </td> -->
+      <td>{{ order.totalPrice | currency:'EUR':'symbol':'1.2-2' }}</td> <!-- Afficher le prix total -->
+
       <td>
         <button type="button" class="btn btn-primary" (click)="updateOrder(order.id)">Modifier</button>
-        <button type="button" class="btn btn-secondary mx-2">Voir</button>
-        <button type="button" class="btn btn-danger">Supprimer</button>
+        <button type="button" class="btn btn-danger mx-2">Annuler</button>
+        <button type="button" class="btn btn-secondary">Télécharger la facture</button>
+
       </td>
     </tr>
   </tbody>

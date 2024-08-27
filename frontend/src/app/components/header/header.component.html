@@ -47,7 +47,7 @@
         </nav>
         
 
-        <nav class="navbar navbar-expand-lg navbar-white bg-white">
+        <nav class="navbar navbar-expand-lg navbar bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" id="logo" href="#">
                     <img src="assets/images/wineko6.svg" alt="WINÉKO" height="25">
@@ -80,7 +80,7 @@
                         <!-- <a class="nav-link active" aria-current="page" href="#">Nouveautés</a> -->
 
                         <a class="nav-link" href="#">Bons plans</a>
-                        <a class="nav-link" href="#">Pourquoi nous choisir ?</a>
+                        <a class="nav-link" routerLink="/why-choose-us">Pourquoi nous choisir ?</a>
                         
 
                     </div>
@@ -96,12 +96,12 @@
                                 <li><a class="dropdown-item" routerLink="/dashboard">Dashboard</a></li>
                                 <hr class="dropdown-divider">
                                 <li><a class="dropdown-item" routerLink="/my-account/profile">Mon profil</a></li>
-                                <li><a class="dropdown-item" routerLink="/my-account/address">Mes adresses</a></li>
-                                <li><a class="dropdown-item" href="#">Mes commandes</a></li>
-                                <li><a class="dropdown-item" href="#">Mes retours</a></li>
+                                <!-- <li><a class="dropdown-item" routerLink="/my-account/address">Mes adresses</a></li> -->
+                                <li><a class="dropdown-item" routerLink="/my-account/my-orders">Mes commandes</a></li>
+                                <li><a class="dropdown-item" routerLink="/my-account/my-returns">Mes retours</a></li>
                                 <li><a class="dropdown-item" href="#">Aide</a></li>
                                 <hr class="dropdown-divider">
-                                <li><a class="dropdown-item" href="#">Contactez-nous</a></li>
+                                <li><a class="dropdown-item" routerLink="/contact">Contactez-nous</a></li>
 
                             </ul>
                         </li>
@@ -109,10 +109,11 @@
                         <a *ngIf="!loggedIn" class="nav-link active" routerLink="/login">Connexion</a>
                         <a *ngIf="loggedIn" class="nav-link active" (click)="logout()">Déconnexion</a>
                         
+                        
 
                     
                         <!-- Lien du panier, toujours visible -->
-                        <a class="nav-link no-padding-right" routerLink="/cart">Panier (0)</a>
+                        <a class="nav-link no-padding-right" routerLink="/cart">Panier ({{ cartItemCount }})</a>
                     </div>
                 </div>
 

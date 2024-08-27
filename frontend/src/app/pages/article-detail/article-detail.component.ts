@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ArticleService } from '../../services/ArticleService.service';
 import { ArticleModel } from '../../models/article.model';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { AddToCartComponent } from '../../components/add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,7 +13,9 @@ import { CommonModule } from '@angular/common';
   imports: [
     HeaderComponent,
     FooterComponent,
-    CommonModule
+    CommonModule,
+    AddToCartComponent,
+    RouterModule
   ],
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.css']
@@ -39,5 +42,21 @@ export class ArticleDetailComponent implements OnInit {
         );
       }
     });
+  }
+
+  shareArticle(): void {
+    if (navigator.share && this.article) {
+      navigator.share({
+        title: this.article.title,
+        text: this.article.description,
+        url: window.location.href
+      }).then(() => {
+        console.log('Article partagé avec succès');
+      }).catch((error) => {
+        console.error('Erreur lors du partage de l\'article', error);
+      });
+    } else {
+      console.error('Le partage n\'est pas pris en charge sur ce navigateur');
+    }
   }
 }

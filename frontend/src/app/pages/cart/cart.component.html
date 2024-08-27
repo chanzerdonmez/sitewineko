@@ -3,36 +3,53 @@
 
 <h4 class="text-center mb-5 mt-5">Mon panier</h4>
 
-<div class="container mt-5">
+<div class="container mt-5" *ngIf="cart && cart.cartLines.length > 0; else emptyCart">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Produit</th>
-                <th scope="col">Description</th>
+                <th scope="col" class="d-none d-md-table-cell">Description</th> <!-- Cacher sur les petits écrans -->
                 <th scope="col">Prix</th>
                 <th scope="col">Quantité</th>
-                <th scope="col">Action</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let article of articles">
-                <td><img src="https://picsum.photos/75" alt="{{ article.title }}"></td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.price | currency: 'EUR':'symbol':'1.2-2':'fr' }}</td>
-                <td>{{ cartItems.get(article.id) }}</td>
+            <tr *ngFor="let line of cart.cartLines">
+                <td><img src="https://picsum.photos/75" alt="{{ line.article.title }}"></td>
+                <td class="d-none d-md-table-cell">{{ line.article.title }}</td> <!-- Cacher sur les petits écrans -->
+                <td>{{ line.article.price | currency: 'EUR':'symbol':'1.2-2':'fr' }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger" (click)="removeFromCart(article.id)">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-light border" style="width: 35px; height: 35px; padding: 0;" (click)="decreaseQuantity(line.article.id)">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <input type="text" class="form-control text-center mx-2" [value]="line.quantity" readonly style="width: 50px; height: 35px;">
+                        <button class="btn btn-light border" style="width: 35px; height: 35px; padding: 0;" (click)="increaseQuantity(line.article.id)">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <i class="fa-solid fa-trash text-danger" style="cursor: pointer;" (click)="removeFromCart(line.article.id)"></i>
                 </td>
             </tr>
         </tbody>
     </table>
     <div class="text-end">
         <h5>Total du panier : {{ totalPrice | currency: 'EUR':'symbol':'1.2-2':'fr' }}</h5>
-        <button class="btn btn-secondary" (click)="clearCart()">Vider le Panier</button>
-        <button class="btn btn-primary" id="btn-paiement">Procéder au paiement</button>
+        <div id="card-element"><!-- Stripe Card Element will be inserted here --></div>
+        <button class="btn btn-secondary mx-2" (click)="clearCart()">Vider le panier</button>
+
+        <button id="btn-paiement" class="btn btn-primary" (click)="proceedToCheckout()">Procéder au paiement</button>
     </div>
 </div>
+
+<ng-template #emptyCart>
+    <div class="text-center">
+        <h5>Votre panier est vide</h5>
+        <button class="btn btn-primary" routerLink="/shop">Continuer vos achats</button>
+    </div>
+</ng-template>
 
 <app-footer></app-footer>

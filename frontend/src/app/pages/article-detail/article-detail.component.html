@@ -1,5 +1,17 @@
 <app-header></app-header>
 
+<!-- <nav aria-label="breadcrumb" *ngIf="article && article.category">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Accueil</a></li>
+        <li class="breadcrumb-item">
+            <a [routerLink]="['/category', article.category?.id]">{{ article.category?.title }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ article.title }}</li>
+    </ol>
+</nav> -->
+
+
+
 <section class="py-5" *ngIf="article">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -10,10 +22,12 @@
                 <h4 class="card-title">{{ article.brand }}</h4>
                 <br>
                 <h4 class="card-title">{{ article.title }}</h4>
+                <br>
                 <p class="card-text">{{ article.description }}</p>
                 <span class="card-price">{{ article.price | currency }}</span><br><br>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-primary" id="btn-panier">Ajouter au panier</a>
+                    <button class="btn btn-secondary" (click)="shareArticle()">Partager</button>
+                    <app-add-to-cart class="mx-2" [article]="article"></app-add-to-cart>
                 </div>
             </div>
         </div>

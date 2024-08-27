@@ -32,16 +32,15 @@ export class OrderComponent implements OnInit {
   loadOrders(): void {
     this.orderService.getOrders().subscribe(
       (data: OrderModel[]) => {
-        console.log(data); // Debugging: Assurez-vous que les données contiennent l'email
         this.orders = data;
       },
-      (error: any) => {
-        console.error('Error fetching orders', error);
+      (error) => {
+        console.error('Erreur lors de la récupération des commandes', error);
       }
     );
   }
   
-
+  
   updateOrder(id: number): void {
     // Ajoutez ici la logique pour mettre à jour une commande
   }

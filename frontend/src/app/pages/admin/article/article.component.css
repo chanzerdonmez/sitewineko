@@ -1,8 +1,3 @@
-#btn-valid {
-    /* background-color: #8A2BE2;
-    border-color: #8A2BE2; */
-}
-
 .custom-pagination .page-link {
     color: #343a40; /* Couleur du texte */
     background-color: transparent; /* Fond transparent */
@@ -27,3 +22,7 @@
     border-color: #343a40; /* Bordure violette de l'élément désactivé */
   }
   
+  #btn-valid {
+    background-color: #6130f2;
+    border-color: #6130f2;
+}

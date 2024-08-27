@@ -1,27 +1,30 @@
 <app-header></app-header>
 
+<!-- Inclure le composant de notification ici -->
+<app-notification></app-notification>
+
 <h4 class="text-center mb-5 mt-5">Contactez-nous</h4>
 
-
 <div class="container-md">
+  <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
     <div class="mb-1">
-        <label for="exampleFormControlInput1" class="form-label"></label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nom">
+      <label for="name" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="name" placeholder="Nom" [(ngModel)]="contact.name" name="name" required>
     </div>
     <div class="mb-1">
-        <label for="exampleFormControlInput2" class="form-label"></label>
-        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Prénom">
+      <label for="prenom" class="form-label">Prénom</label>
+      <input type="text" class="form-control" id="prenom" placeholder="Prénom" [(ngModel)]="contact.prenom" name="prenom" required>
     </div>
     <div class="mb-1">
-        <label for="exampleFormControlInput3" class="form-label"></label>
-        <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="Email@wineko.fr">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Email@wineko.fr" [(ngModel)]="contact.email" name="email" required>
     </div>
     <div class="mb-5">
-        <label for="exampleFormControlTextarea1" class="form-label"></label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Votre message"></textarea>
+      <label for="message" class="form-label">Votre message</label>
+      <textarea class="form-control" id="message" rows="3" placeholder="Votre message" [(ngModel)]="contact.message" name="message" required></textarea>
     </div>
-    <a href="#" class="btn btn-primary" id="btn-panier">Envoyer</a>
-
+    <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Envoyer</button>
+  </form>
 </div>
 
 <app-footer></app-footer>

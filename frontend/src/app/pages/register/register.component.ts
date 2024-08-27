@@ -7,6 +7,7 @@ import { UserModel } from '../../models/user.model';
 import { Role } from '../../models/role.enum';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, ReCaptchaV3Service } from "ng-recaptcha";
 import { FooterComponent } from '../../components/footer/footer.component';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
     CommonModule,
     RecaptchaV3Module,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RouterLink
   ],
   providers: [
     { provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LcZsQgqAAAAAOqDZEK_qv73-3SbJ6xUan51MBs6' }
@@ -84,7 +86,7 @@ export class RegisterComponent implements OnInit {
           this.userService.register(user).subscribe({
             next: (response) => {
               console.log('Inscription réussie:', response);
-              this.confirmationMessage = 'Merci de vérifier votre boîte de réception pour confirmer votre adresse e-mail.'; // Définir le message de confirmation
+              this.confirmationMessage = 'Vérifiez votre boîte de réception pour confirmer votre e-mail.'; // Définir le message de confirmation
             },
             error: (error) => {
               console.error("Erreur lors de l'inscription :", error);

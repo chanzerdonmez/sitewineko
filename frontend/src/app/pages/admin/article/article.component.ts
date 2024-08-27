@@ -56,8 +56,6 @@ export class ArticleComponent implements OnInit {
     this.createFormModel();
     this.loadCategories();
     this.loadArticles();
-
-
   }
 
   onFileSelected(event: any): void {

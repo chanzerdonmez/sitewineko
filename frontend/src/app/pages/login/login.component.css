@@ -1,4 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
 #btn-connect {
     background-color: #6130f2;
     border-color: #6130f2;
 }
+
+#slogan {
+    /* color: #8A2BE2; */
+    color: #666666;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    }
+
+    h4 {
+        font-family: "DM Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+    }

@@ -1,0 +1,54 @@
+<!-- <h5 class="mb-3 mt-5 text-center">Mes commandes</h5> -->
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">N° de commande</th>
+      <th scope="col">Statut</th>
+      <th scope="col">Date</th>
+      <th scope="col">Adresses</th>
+      <!-- <th scope="col">Prix total</th> -->
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.numberOrder }}</td>
+      <td>En cours</td>
+      <td>{{ order.dateCreation | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Adresse de facturation</h6>
+                <p class="card-text">
+                  {{ order.billingAddress?.name }}, {{ order.billingAddress?.firstName }}<br>
+                  {{ order.billingAddress?.streetNumber }} rue / avenue <br> {{ order.billingAddress?.streetName }}<br>
+                  {{ order.billingAddress?.city }},<br>{{ order.billingAddress?.zipCode }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Adresse de livraison</h6>
+                <p class="card-text">
+                  {{ order.shippingAddress?.name }}, {{ order.shippingAddress?.firstName }}<br>
+                  {{ order.shippingAddress?.streetNumber }} rue / avenue <br>{{ order.shippingAddress?.streetName }}<br>
+                  {{ order.shippingAddress?.city }},<br>{{ order.shippingAddress?.zipCode }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <!-- <td>{{ order.totalPrice | currency:'EUR' }}</td> -->
+      <td>
+        <button type="button" id="btn-return" class="btn btn-primary">Retour</button>
+
+        <button type="button" id="btn-dl" class="btn btn-secondary mx-2">Télécharger la facture</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,63 +1,111 @@
-
-<h4 class="text-center mb-5 mt-5">Mon profil</h4>
-
-<div class="container">
+<div class="container mt-5">
+  <!-- Formulaire pour la mise à jour du profil -->
   <form [formGroup]="formProfile" (ngSubmit)="submitProfileForm()" novalidate>
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="mb-3">
-          <label for="name" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp">
-          <div *ngIf="formProfile.get('name')?.invalid && (formProfile.get('name')?.dirty || formProfile.get('name')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('name')?.errors?.['required']">Un nom est requis.</div>
+        <h4>Informations du profil</h4>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp">
+            <div *ngIf="formProfile.get('name')?.invalid && (formProfile.get('name')?.dirty || formProfile.get('name')?.touched)" class="text-danger">
+              <div *ngIf="formProfile.get('name')?.errors?.['required']">Un nom est requis.</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="firstName" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="firstNameHelp">
+            <div *ngIf="formProfile.get('firstName')?.invalid && (formProfile.get('firstName')?.dirty || formProfile.get('firstName')?.touched)" class="text-danger">
+              <div *ngIf="formProfile.get('firstName')?.errors?.['required']">Un prénom est requis.</div>
+            </div>
           </div>
         </div>
-
-        <div class="mb-3">
-          <label for="firstName" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="firstNameHelp">
-          <div *ngIf="formProfile.get('firstName')?.invalid && (formProfile.get('firstName')?.dirty || formProfile.get('firstName')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('firstName')?.errors?.['required']">Un prénom est requis.</div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="phone" class="form-label">Numéro de téléphone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" aria-describedby="phoneHelp">
+            <div *ngIf="formProfile.get('phone')?.invalid && (formProfile.get('phone')?.dirty || formProfile.get('phone')?.touched)" class="text-danger">
+              <div *ngIf="formProfile.get('phone')?.errors?.['required']">Le numéro de téléphone est requis.</div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="birthdate" class="form-label">Date de naissance</label>
+            <input type="date" class="form-control" id="birthdate" formControlName="birthdate" aria-describedby="birthdateHelp">
+            <div *ngIf="formProfile.get('birthdate')?.invalid && (formProfile.get('birthdate')?.dirty || formProfile.get('birthdate')?.touched)" class="text-danger">
+              <div *ngIf="formProfile.get('birthdate')?.errors?.['required']">La date de naissance est requise.</div>
+            </div>
           </div>
         </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Adresse e-mail</label>
-          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
-          <div *ngIf="formProfile.get('email')?.invalid && (formProfile.get('email')?.dirty || formProfile.get('email')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('email')?.errors?.['required']">L'adresse e-mail est requise.</div>
-            <div *ngIf="formProfile.get('email')?.errors?.['email']">L'adresse e-mail n'est pas valide.</div>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="phone" class="form-label">Numéro de téléphone</label>
-          <input type="text" class="form-control" id="phone" formControlName="phone" aria-describedby="phoneHelp">
-          <div *ngIf="formProfile.get('phone')?.invalid && (formProfile.get('phone')?.dirty || formProfile.get('phone')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('phone')?.errors?.['required']">Le numéro de téléphone est requis.</div>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="birthdate" class="form-label">Date de naissance</label>
-          <input type="date" class="form-control" id="birthdate" formControlName="birthdate" aria-describedby="birthdateHelp">
-          <div *ngIf="formProfile.get('birthdate')?.invalid && (formProfile.get('birthdate')?.dirty || formProfile.get('birthdate')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('birthdate')?.errors?.['required']">La date de naissance est requise.</div>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" class="form-control" id="password" formControlName="password">
-          <div *ngIf="formProfile.get('password')?.invalid && (formProfile.get('password')?.dirty || formProfile.get('password')?.touched)" class="text-danger">
-            <div *ngIf="formProfile.get('password')?.errors?.['required']">Le mot de passe est requis.</div>
-          </div>
-        </div>
-
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary w-100 mt-3" id="btn-register">Mettre à jour</button>
-        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2" id="btn-update-profile">Mettre à jour le profil</button>
       </div>
     </div>
   </form>
+
+
+  <!-- Formulaire pour la mise à jour de l'e-mail -->
+  <form [formGroup]="formEmail" (ngSubmit)="submitEmailForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h4>Adresse e-mail</h4>
+        <div class="mb-3">
+          <label for="email" class="form-label">Adresse e-mail</label>
+          <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
+          <div *ngIf="formEmail.get('email')?.invalid && (formEmail.get('email')?.dirty || formEmail.get('email')?.touched)" class="text-danger">
+            <div *ngIf="formEmail.get('email')?.errors?.['required']">L'adresse e-mail est requise.</div>
+            <div *ngIf="formEmail.get('email')?.errors?.['email']">L'adresse e-mail n'est pas valide.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="btn-update-email">Changer l'adresse e-mail</button>
+      </div>
+    </div>
+  </form>
+
+
+  <!-- Formulaire pour la mise à jour du mot de passe -->
+  <form [formGroup]="formPassword" (ngSubmit)="submitPasswordForm()" novalidate>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h4>Changer le mot de passe</h4>
+        <div class="mb-3">
+          <label for="oldPassword" class="form-label">Ancien mot de passe</label>
+          <input type="password" class="form-control" id="oldPassword" formControlName="oldPassword">
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Nouveau mot de passe</label>
+          <input type="password" class="form-control" id="newPassword" formControlName="newPassword">
+          <div *ngIf="formPassword.get('newPassword')?.invalid && (formPassword.get('newPassword')?.dirty || formPassword.get('newPassword')?.touched)" class="text-danger">
+            <div *ngIf="formPassword.get('newPassword')?.errors?.['required']">Le mot de passe est requis.</div>
+            <div *ngIf="formPassword.get('newPassword')?.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="btn-update-password">Changer le mot de passe</button>
+      </div>
+    </div>
+  </form>
+<!-- Bouton pour supprimer le compte -->
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6">
+    <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Supprimer mon compte</button>
+  </div>
+</div>
+
+<!-- Modal de confirmation -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteAccountModalLabel">Confirmer la suppression du compte</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAccount()">Supprimer mon compte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>

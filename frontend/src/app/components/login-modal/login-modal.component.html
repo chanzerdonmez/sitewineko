@@ -1,0 +1,18 @@
+<div class="modal" tabindex="-1" id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Connexion requise</h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+            </div>
+            <div class="modal-body">
+                <p>Vous devez être connecté pour ajouter des produits à votre panier.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClose()">Fermer</button>
+                <button type="button" class="btn btn-primary" routerLink="/login">Connexion</button>
+                <button type="button" class="btn btn-success" routerLink="/register">Inscription</button>
+            </div>
+        </div>
+    </div>
+</div>
