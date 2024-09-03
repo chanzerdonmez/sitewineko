@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   public loggedIn: boolean = false;
   public cartItemCount: number = 0;  // Variable pour stocker le nombre d'articles dans le panier
-
+  public isAdmin: boolean = false;
 
   categories: any[] = [];
 
@@ -39,20 +39,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    if (this.saveUser.currentUserValue != null) {
+    const currentUser = this.saveUser.currentUserValue;
+    if (currentUser != null) {
       this.loggedIn = true;
+      this.isAdmin = currentUser.role === 'ADMIN';
     }
-    
-    // S'abonner aux changements du nombre d'articles dans le panier
-    this.cartService.getCartItemCount().subscribe(count => {
+
+    this.cartService.getCartItemCount().subscribe((count) => {
       this.cartItemCount = count;
     });
 
-    // Initialiser le compte du panier au démarrage
     this.cartService.updateCartItemCount();
-
-
-    
   }
 
   
@@ -71,17 +68,34 @@ export class HeaderComponent implements OnInit {
 
 
 
-   logout(): void {
+  logout(): void {
     this.userService.logout().subscribe({
-      next: (response) => {
-          console.log(response)
-      },
-      error: (error) => {
-        console.error("Erreur lors de la connexion :", error);
-      },
+        next: (response) => {
+            console.log(response);
+            localStorage.clear(); // Nettoyer le localStorage
+            this.saveUser.clearUser(); // Effacer les informations utilisateur de SaveUser
+
+            // Force une mise à jour de l'état de connexion
+            this.loggedIn = false;
+            this.router.navigate(['/login']).then(() => {
+                window.location.reload(); // Recharger la page pour mettre à jour le bouton de connexion/déconnexion
+            });
+        },
+        error: (error) => {
+            console.error("Erreur lors de la déconnexion :", error);
+            localStorage.clear(); // Nettoyer le localStorage en cas d'erreur
+            this.saveUser.clearUser(); // Effacer les informations utilisateur de SaveUser
+
+            // Force une mise à jour de l'état de connexion
+            this.loggedIn = false;
+            this.router.navigate(['/login']).then(() => {
+                window.location.reload(); // Recharger la page pour mettre à jour le bouton de connexion/déconnexion
+            });
+        }
     });
-    this.router.navigate(['/login']);
-  }
+}
+
+
 
 
   getCartItemCount(): void {

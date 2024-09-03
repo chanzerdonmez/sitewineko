@@ -19,6 +19,9 @@ export class ProfileComponent implements OnInit {
   public formProfile!: FormGroup;
   public formEmail!: FormGroup;
   public formPassword!: FormGroup;
+  public loading: boolean = false;  // Pour l'état de chargement
+  public successMessage: string = '';  // Pour les messages de succès
+  public errorMessage: string = '';  // Pour les messages d'erreur
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -46,8 +49,10 @@ export class ProfileComponent implements OnInit {
   }
 
   private loadUserProfile(): void {
+    this.loading = true;
     this.userService.getUserInfo().subscribe(
       (userInfo) => {
+        this.loading = false;
         // Pré-remplir le formulaire avec les informations de l'utilisateur
         this.formProfile.patchValue({
           name: userInfo.name,
@@ -61,62 +66,81 @@ export class ProfileComponent implements OnInit {
         });
       },
       (error) => {
-        console.error('Erreur lors de la récupération des informations de l\'utilisateur', error);
+        this.loading = false;
+        this.errorMessage = 'Erreur lors de la récupération des informations de l\'utilisateur';
+        console.error(this.errorMessage, error);
       }
     );
   }
 
   public submitProfileForm(): void {
     if (this.formProfile.valid) {
-      // Logique pour mettre à jour le profil (nom, prénom, téléphone, date de naissance)
-      console.log('Profil mis à jour:', this.formProfile.value);
-      this.userService.updateUserProfile(this.formProfile.value).subscribe(response => {
-        console.log('Profil mis à jour avec succès');
-      }, error => {
-        console.error('Erreur lors de la mise à jour du profil', error);
+      this.loading = true;
+      this.userService.updateUserProfile(this.formProfile.value).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.successMessage = 'Profil mis à jour avec succès';
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = 'Erreur lors de la mise à jour du profil';
+          console.error(this.errorMessage, error);
+        }
       });
     }
   }
 
   public submitEmailForm(): void {
     if (this.formEmail.valid) {
+      this.loading = true;
       const updateEmailDto = {
         newEmail: this.formEmail.get('email')?.value
       };
-      console.log('Email mis à jour:', updateEmailDto);
-      this.userService.updateUserEmail(updateEmailDto).subscribe(response => {
-        console.log('Email mis à jour avec succès');
-      }, error => {
-        console.error('Erreur lors de la mise à jour de l\'email', error);
+      this.userService.updateUserEmail(updateEmailDto).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.successMessage = 'Email mis à jour avec succès';
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = 'Erreur lors de la mise à jour de l\'email';
+          console.error(this.errorMessage, error);
+        }
       });
     }
   }
-  
 
   public submitPasswordForm(): void {
     if (this.formPassword.valid) {
-      console.log('Mot de passe mis à jour:', this.formPassword.value);
-      this.userService.updateUserPassword(this.formPassword.value).subscribe(response => {
-        console.log('Mot de passe mis à jour avec succès');
-      }, error => {
-        console.error('Erreur lors de la mise à jour du mot de passe', error);
+      this.loading = true;
+      this.userService.updateUserPassword(this.formPassword.value).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.successMessage = 'Mot de passe mis à jour avec succès';
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = 'Erreur lors de la mise à jour du mot de passe';
+          console.error(this.errorMessage, error);
+        }
       });
     }
   }
 
   deleteAccount(): void {
+    this.loading = true;
     this.userService.deleteAccount().subscribe({
       next: (response) => {
+        this.loading = false;
         alert('Compte supprimé avec succès.');
-        // Redirigez l'utilisateur après la suppression
-        this.router.navigate(['/']); // Redirige vers la page d'accueil, par exemple
+        this.router.navigate(['/']); 
       },
       error: (error) => {
-        alert('Erreur lors de la suppression du compte.');
-        console.error('Erreur lors de la suppression du compte:', error);
+        this.loading = false;
+        this.errorMessage = 'Erreur lors de la suppression du compte.';
+        console.error(this.errorMessage, error);
       }
     });
   }
-
 
 }

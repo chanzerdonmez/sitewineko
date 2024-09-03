@@ -16,7 +16,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let line of cart.cartLines">
-                <td><img src="https://picsum.photos/75" alt="{{ line.article.title }}"></td>
+                <img [src]="'http://localhost:8080/' + line.article.image" class="card-img-top" alt="Article Image" style="width: 75px; height: auto;">
+                <!-- <td><img src="https://picsum.photos/75" alt="{{ line.article.title }}"></td> -->
                 <td class="d-none d-md-table-cell">{{ line.article.title }}</td> <!-- Cacher sur les petits écrans -->
                 <td>{{ line.article.price | currency: 'EUR':'symbol':'1.2-2':'fr' }}</td>
                 <td>
@@ -48,7 +49,7 @@
 <ng-template #emptyCart>
     <div class="text-center">
         <h5>Votre panier est vide</h5>
-        <button class="btn btn-primary" routerLink="/shop">Continuer vos achats</button>
+        <button id="btn-continue" class="btn btn-primary" routerLink="/">Continuer vos achats</button>
     </div>
 </ng-template>
 

@@ -1,1 +1,22 @@
 <button (click)="addToCart()" class="btn btn-primary" id="btn-panier">Ajouter au panier</button>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{'d-block': showAuthModal}" *ngIf="showAuthModal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document"> <!-- Centrer la modal verticalement -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Connexion requise</h5>
+          <button type="button" class="close" (click)="closeModal()" aria-label="Close" style="background: none; border: none; font-size: 1.5rem;">
+            &times; <!-- La croix sans rectangle autour -->
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Vous devez être connecté pour ajouter des articles à votre panier. Veuillez vous connecter ou créer un compte.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="navigateToLogin()">Connexion</button>
+          <button type="button-register" class="btn btn-primary" (click)="navigateToSignup()">Inscription</button>
+        </div>
+      </div>
+    </div>
+  </div>

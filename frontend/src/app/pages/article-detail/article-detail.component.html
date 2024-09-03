@@ -16,7 +16,8 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0 rounded" src="https://picsum.photos/1000/1000" alt="Image de l'article" />
+                <img [src]="'http://localhost:8080/' + article.image" class="card-img-top" alt="Article Image">
+                <!-- <img class="card-img-top mb-5 mb-md-0 rounded" src="https://picsum.photos/1000/1000" alt="Image de l'article" /> -->
             </div>
             <div class="col-md-6">
                 <h4 class="card-title">{{ article.brand }}</h4>

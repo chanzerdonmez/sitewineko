@@ -5,4 +5,7 @@ export class UserDto {
   email?: string;
   token?: string;
   role?: string;
+  phone?: string; // Ajoutez cette ligne
+  birthdate?: Date; // Ajoutez cette ligne
+
 }

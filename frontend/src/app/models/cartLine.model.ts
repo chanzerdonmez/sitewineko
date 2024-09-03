@@ -7,5 +7,6 @@ export interface CartLine {
         id: number;
         title: string;
         price: number;
+        image: string; // Ajoutez cette ligne pour inclure l'image
     };
 }

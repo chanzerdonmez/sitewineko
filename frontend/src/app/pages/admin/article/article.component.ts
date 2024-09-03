@@ -41,9 +41,9 @@ export class ArticleComponent implements OnInit {
   private selectedFile!: File;
 
 
- // public currentPage: number = 1; // Page courante
- // public itemsPerPage: number = 10; // Nombre d'articles par page
- // public totalItems: number = 0; // Nombre total d'articles (pour la pagination)
+ public currentPage: number = 1; // Page courante
+ public itemsPerPage: number = 10; // Nombre d'articles par page
+ public totalItems: number = 0; // Nombre total d'articles (pour la pagination)
 
   @Output() articleCreated: EventEmitter<ArticleModel> = new EventEmitter<ArticleModel>();
   @Output() articleDeleted: EventEmitter<number> = new EventEmitter<number>();
@@ -178,17 +178,7 @@ updateArticle(id: number) {
 
 
 
-  // loadArticles(): void {
-  //   this.articleService.getAll().subscribe(
-  //     (articles: ArticleModel[]) => {
-  //       this.articles = articles;
-  //       console.log('Articles chargés dans le composant :', this.articles);
-  //     },
-  //     (error) => {
-  //       console.error('Une erreur s\'est produite lors du chargement des articles :', error);
-  //     }
-  //   );
-  // }
+
 
   createFormModel(): void {
     this.formArticle = new FormGroup ({
@@ -206,7 +196,7 @@ updateArticle(id: number) {
     this.articleService.getAll().subscribe(
       (articles: ArticleModel[]) => {
         this.articles = articles;
-//        this.totalItems = this.articles.length;
+       this.totalItems = this.articles.length;
         console.log('Articles chargés dans le composant :', this.articles);
       },
       (error) => {
@@ -219,22 +209,22 @@ updateArticle(id: number) {
     this.router.navigate(['/article', id]);
   }
 
-// get paginatedArticles(): ArticleModel[] {
-//   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-//   return this.articles.slice(startIndex, startIndex + this.itemsPerPage);
-// }
+get paginatedArticles(): ArticleModel[] {
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  return this.articles.slice(startIndex, startIndex + this.itemsPerPage);
+}
 
-// getPageNumbers(): number[] {
-//   return Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
-// }
+getPageNumbers(): number[] {
+  return Array(Math.ceil(this.totalItems / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
+}
 
-// getTotalPages(): number {
-//   return Math.ceil(this.totalItems / this.itemsPerPage);
-// }
+getTotalPages(): number {
+  return Math.ceil(this.totalItems / this.itemsPerPage);
+}
 
-// onPageChange(pageNumber: number): void {
-//   this.currentPage = pageNumber;
-// }
+onPageChange(pageNumber: number): void {
+  this.currentPage = pageNumber;
+}
 
 
 

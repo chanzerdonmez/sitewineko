@@ -82,7 +82,7 @@ export class PaymentComponent implements OnInit {
     const orderLines = this.items.map(item => ({
       productName: item.title,
       quantity: item.quantity,
-      unitPrice: item.price
+      unitPrice: item.price,
     }));
   
     const orderData = {

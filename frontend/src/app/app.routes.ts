@@ -14,9 +14,8 @@ import { CategoryPageComponent } from "./pages/category-page/category-page.compo
 import { ArticleDetailComponent } from "./pages/article-detail/article-detail.component";
 import { OrderComponent } from "./pages/admin/order/order.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { AddressComponent } from "./pages/address/address.component";
 import { MyAccountComponent } from "./pages/my-account/my-account.component";
-import { PaymentComponent } from "./components/payment/payment.component";
+import { PaymentComponent } from "./pages/payment/payment.component";
 import { SuccessComponent } from "./pages/success/success.component";
 import { CancelComponent } from "./pages/cancel/cancel.component";
 import { MyOrdersComponent } from "./pages/my-orders/my-orders.component";
@@ -24,6 +23,8 @@ import { MyReturnsComponent } from "./pages/my-returns/my-returns.component";
 import { ForgottenPasswordComponent } from "./pages/forgotten-password/forgotten-password.component";
 import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
 import { WhyChooseUsComponent } from "./pages/why-choose-us/why-choose-us.component";
+import { adminGuard } from "./guards/admin.guard";
+import { authGuard } from "./guards/auth.guad";
 
 export const routes: Routes = [
   {
@@ -31,21 +32,13 @@ export const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: "address",
-    component: AddressComponent,
-  },
-  // {
-  //     path: '',
-  //     redirectTo: '/all',
-  //     pathMatch: 'full'
-  // },
-  {
     path: "category/:categoryTitle",
     component: CategoryPageComponent,
   },
   {
     path: "dashboard",
     component: DashboardComponent,
+    canActivate: [adminGuard], // Utilisation de la guard pour les admins
     children: [
       { path: "", redirectTo: "article", pathMatch: "full" },
       { path: "article", component: ArticleComponent },
@@ -57,17 +50,13 @@ export const routes: Routes = [
   {
     path: "my-account",
     component: MyAccountComponent,
+    canActivate: [authGuard], // Guard pour les utilisateurs connectés
     children: [
       { path: "", redirectTo: "profile", pathMatch: "full" },
       { path: "profile", component: ProfileComponent },
-      { path: "address", component: AddressComponent },
       { path: "my-orders", component: MyOrdersComponent },
       { path: "my-returns", component: MyReturnsComponent },
     ],
-  },
-  {
-    path: "payment",
-    component: PaymentComponent,
   },
   {
     path: "register",
@@ -97,17 +86,18 @@ export const routes: Routes = [
     path: "cancel",
     component: CancelComponent,
   },
-  // {
-  //     path: 'dashboard/category',
-  //     component: CategoryComponent
-  // },
   {
     path: "article-list",
     component: ArticleListComponent,
   },
   {
+    path: "payment",
+    component: PaymentComponent,
+  },
+  {
     path: "profile",
     component: ProfileComponent,
+    canActivate: [authGuard], // Guard pour les utilisateurs connectés
   },
   {
     path: "cart",
@@ -121,10 +111,6 @@ export const routes: Routes = [
     path: "login",
     component: LoginComponent,
   },
-  // {
-  //     path: 'dashboard/article',
-  //     component: ArticleComponent
-  // },
   {
     path: "**",
     component: NotFoundComponent,

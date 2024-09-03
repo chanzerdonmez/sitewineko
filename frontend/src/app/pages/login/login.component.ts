@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           this.formLogin.reset();
           this.saveUser.saveUser(response);
-          this.router.navigate(["/dashboard"]);
+          this.router.navigate(["/"]);
         },
         error: (error) => {
           console.error("Erreur lors de la connexion :", error);

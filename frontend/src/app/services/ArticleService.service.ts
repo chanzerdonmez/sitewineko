@@ -133,4 +133,7 @@ export class ArticleService {
     }
     
 
+    getImageUrl(filename: string): string {
+        return `${this.apiUrl}/image/${filename}`;
+      }
 }

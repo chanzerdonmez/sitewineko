@@ -86,7 +86,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let article of articles">
+      <tr *ngFor="let article of paginatedArticles">
         <td>{{ article.brand }}</td>
 
         <td>{{ article.title | slice:0:13 }}{{ article.title.length > 13 ? '...' : '' }}</td>
@@ -117,18 +117,18 @@
     </tbody>
   </table>
 
-  <!-- <nav aria-label="Page navigation example">
+  <nav aria-label="Page navigation example">
     <ul class="pagination custom-pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">
         <button class="page-link" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
       </li>
-      <li class="page-item" id="btn-number2" *ngFor="let pageNumber of getPageNumbers()" [class.active]="pageNumber === currentPage">
-        <button id="btn-number" class="page-link" (click)="onPageChange(pageNumber)">{{ pageNumber }}</button>
+      <li class="page-item" *ngFor="let pageNumber of getPageNumbers()" [class.active]="pageNumber === currentPage">
+        <button class="page-link" (click)="onPageChange(pageNumber)">{{ pageNumber }}</button>
       </li>
       <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
         <button class="page-link" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === getTotalPages()">Suivant</button>
       </li>
     </ul>
-  </nav> -->
+  </nav>
 
 </div>

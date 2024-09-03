@@ -118,4 +118,20 @@ export class UserComponent implements OnInit {
       console.error("Le formulaire n'est pas valide.");
     }
   }
+
+
+  deleteUser(id: number) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      this.usersService.deleteUser(id).subscribe(
+        () => {
+          console.log('Utilisateur supprimé avec succès');
+          this.loadUsers(); // Recharger la liste après suppression
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de l\'utilisateur', error);
+        }
+      );
+    }
+  }
+  
 }

@@ -31,4 +31,5 @@ export class AppComponent {
   constructor(){
     registerLocaleData(fr.default)
   }
+
 }

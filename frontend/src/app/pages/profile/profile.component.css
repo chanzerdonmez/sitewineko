@@ -2,3 +2,21 @@
     background-color: #6130f2;
     border-color: #6130f2;
 }
+
+.mt-h4 {
+    margin-top: 2rem; /* Ajustez la valeur pour plus ou moins d'espace */
+  }
+  
+#btn-update-email {
+    background-color: #6130f2;
+    border-color: #6130f2; 
+}
+#btn-update-profile {
+    background-color: #6130f2;
+    border-color: #6130f2; 
+}
+
+#btn-update-password {
+    background-color: #6130f2;
+    border-color: #6130f2; 
+}

@@ -93,8 +93,9 @@
                             </a>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" routerLink="/dashboard">Dashboard</a></li>
-                                <hr class="dropdown-divider">
+                                <li *ngIf="loggedIn && isAdmin" class="nav-item dropdown">
+                                    <a class="dropdown-item" routerLink="/dashboard">Dashboard</a>
+                                  </li>                                
                                 <li><a class="dropdown-item" routerLink="/my-account/profile">Mon profil</a></li>
                                 <!-- <li><a class="dropdown-item" routerLink="/my-account/address">Mes adresses</a></li> -->
                                 <li><a class="dropdown-item" routerLink="/my-account/my-orders">Mes commandes</a></li>

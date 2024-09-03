@@ -9,5 +9,6 @@ export class UserModel {
     public role: string,
     public roleName: string,
     public token: string
+
   ) {}
 }

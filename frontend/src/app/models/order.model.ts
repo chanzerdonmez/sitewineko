@@ -13,5 +13,6 @@ export class OrderModel {
     public shippingAddress: AddressModel,  // Add this line
     public totalPrice: number // Add this line
 
+
   ) {}
 }

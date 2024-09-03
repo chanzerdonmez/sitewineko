@@ -5,6 +5,7 @@ import { UserModel } from "../models/user.model";
 import { tap } from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { SaveUser } from "./SaveUser.service";
+import { UserDto } from "../dto/UserDto";
 
 const httpOptions = { 
   header: new HttpHeaders({ 'content-type': 'application/json',
@@ -20,6 +21,10 @@ export class UserService {
   private baseUrl = 'http://localhost:8080';
   private usersUrl2 = 'http://localhost:8080/api/users';
   private apiUrl = 'http://localhost:8080/api/users/info';
+  private apiUrl4 = 'http://localhost:8080/api/users/me';
+  private apiUrl5 = 'http://localhost:8080/api/users/admin'; // URL du nouveau endpoint
+
+
 
   private _loggedIn: boolean = false;
 
@@ -32,7 +37,9 @@ export class UserService {
     });
   }
 
-  
+  getCurrentUser(): Observable<UserDto> {
+    return this.http.get<UserDto>(this.apiUrl4, { withCredentials: true });
+  }
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.usersUrl}/login`, credentials, { withCredentials: true }).pipe(
@@ -189,6 +196,10 @@ export class UserService {
           return throwError(() => error);
         })
       );
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.apiUrl5}/${id}`);
   }
 
   

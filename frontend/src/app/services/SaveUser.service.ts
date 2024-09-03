@@ -4,6 +4,7 @@ import { UserModel } from "../models/user.model";
 import { UserDto } from "../dto/UserDto";
 
 
+
 @Injectable({
   providedIn: "root",
 })
@@ -38,4 +39,8 @@ export class SaveUser {
     localStorage.setItem("currentUserDashboard", JSON.stringify(user));
     this.currentUserSubject.next(user);
   }
+
+  public clearUser() {
+  }
+
 }

@@ -9,7 +9,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { Stripe, StripeElements, StripeCardElement } from '@stripe/stripe-js'; // Correction ici
 import { StripeService } from '../../services/StripeService.service'; // Correction ici
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../services/NotificationService.service';
 
 
@@ -20,7 +20,8 @@ import { NotificationService } from '../../services/NotificationService.service'
   imports: [
     HeaderComponent,
     FooterComponent,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
